@@ -40,22 +40,28 @@ public class Users implements UserDetails{
 	@Column(name = "contact_number",unique =  true, nullable=false)
 	private String contactNumber;
 
-	@Column(name = "email", unique = true, nullable=false)
-	private String email;
+	@Column(name = "institute_name")
+	private String instituteName;
 
-	@Column(name = "user_role")
+	@Column(name = "enrollment",unique =  true)
+	private String Enrollment;
+
+	@Column(name = "status",nullable = false)
+	private String status;
+
+	@Column(name = "user_role",nullable = false)
 	private String role;
 
-	@Column(name = "password")
+	@Column(name = "password",nullable = false)
 	private String password;
 	
-	@Column(name = "date_created")
+	@Column(name = "date_created",nullable = false)
 	private Date createdDate;
 	
 	@Column(name = "date_modify")
 	private Date modifyDate;
 	
-	@Column(name = "isdeleted")
+	@Column(name = "isdeleted",nullable = false)
 	private boolean isDeleted;
 
 	@Override
@@ -66,10 +72,11 @@ public class Users implements UserDetails{
 
 	@Override
 	public String getUsername() {
-		return email;
+		return userId;
 	}
 
-	@Override
+	// Methods for account expiration, locking, credentials expiration, and account status
+    @Override
 	public boolean isAccountNonExpired() {
 		return true;
 	}
