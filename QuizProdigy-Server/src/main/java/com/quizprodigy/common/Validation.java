@@ -32,7 +32,7 @@ public class Validation {
 	}
 
 	// validate first name
-	public static boolean firstNameValidation(String first_name) {
+	public static boolean nameValidation(String first_name) {
 
 		if (first_name.length() > 2) {
 			return true;
@@ -41,15 +41,6 @@ public class Validation {
 		}
 	}
 
-	// validate last name
-	public static boolean lastNameValidation(String last_name) {
-
-		if (last_name.length() > 3) {
-			return true;
-		} else {
-			return false;
-		}
-	}
 
 	// validate password
 	public static boolean passwordValidation(String password) {
