@@ -1,10 +1,13 @@
 package com.quizprodigy.entity;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -25,13 +28,14 @@ public class Question {
     @Column(name = "question_id")
     private String questionId;
 
-    @Column(name = "exam_id")
-    private int examId;
-
     @Column(name = "question")
     private String question;
 
     @ManyToOne
     @JoinColumn(name = "exam_id")
     private Exam exam;
+
+    @OneToMany(mappedBy = "question")
+    private List<Options> options;
+
 }

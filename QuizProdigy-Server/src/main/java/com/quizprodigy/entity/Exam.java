@@ -1,14 +1,14 @@
 package com.quizprodigy.entity;
 
 import java.util.Date;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -26,23 +26,22 @@ import lombok.ToString;
 public class Exam {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "exam_id")
-    private int examId;
+    private String examId;
 
-    @Column(name = "subject_name")
+    @Column(name = "subject_name",nullable = false)
     private String subjectName;
 
-    @Column(name = "total_questions")
+    @Column(name = "total_questions",nullable = false)
     private int totalQuestions;
 
-    @Column(name = "total_time")
+    @Column(name = "total_time",nullable = false)
     private int totalTime;
 
     @Column(name = "per_question_time")
     private int perQuestionTime;
 
-    @Column(name = "created_date")
+    @Column(name = "created_date",nullable = false)
     private Date createdDate;
 
     @Column(name = "modify_date")
@@ -58,8 +57,7 @@ public class Exam {
     @JoinColumn(name = "teacher_id")
     private Teachers teacherId;
 
-    @ManyToOne
-    @JoinColumn(name = "student_id") // This is the foreign key column in the Exam table
-    private Students student;
+    @OneToMany(mappedBy = "exam")
+    private List<Question> questions;
 
 }

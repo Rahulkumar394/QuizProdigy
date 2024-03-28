@@ -26,9 +26,6 @@ public class Options {
 	@Column(name = "option_id")// uuid
 	private String optionId;
 
-    @Column(name = "question_id",nullable = false)
-	private String questionId;
-
     @Column(name = "option_value",nullable = false)
     private String optionValue;
 

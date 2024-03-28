@@ -3,6 +3,8 @@ package com.quizprodigy.entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -24,10 +26,10 @@ public class Answers {
 	@Column(name = "answer_id")// uuid
 	private String answerId;
 
-    @Column(name = "question_id",nullable = false)
-	private String questionId;
-
     @Column(name = "correct_option",nullable = false)
     private String correctOption;
 
+    @ManyToOne
+    @JoinColumn(name = "question_id")
+    private Question question;
 }
