@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.quizprodigy.entity.Users;
 import com.quizprodigy.repository.UserRepository;
 
-
 @Service
 public class CustomUserDetailsServices implements UserDetailsService {
 
@@ -17,8 +16,8 @@ public class CustomUserDetailsServices implements UserDetailsService {
 	private UserRepository userRepository;
 
 	@Override
-	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		Users user = userRepository.findByEmail(email);
+	public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
+		Users user = userRepository.findByuserId(userId);
 		return user;
 	}
 }

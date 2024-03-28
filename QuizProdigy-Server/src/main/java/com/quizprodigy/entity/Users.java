@@ -28,35 +28,17 @@ import lombok.ToString;
 public class Users implements UserDetails{
 	
 	@Id
-	@Column(name = "user_id")
+	@Column(name = "user_id")//will be email
 	private String userId;
 
-	@Column(name = "first_name",nullable = false)
-	private String firstName;
+	@Column(name = "user_name",nullable = false)
+	private String userName;
 
-	@Column(name = "last_name",nullable = false)
-	private String lastName;
-
-	@Column(name = "contact_number",unique =  true, nullable=false)
-	private String contactNumber;
-
-	@Column(name = "email", unique = true, nullable=false)
-	private String email;
-
-	@Column(name = "user_role")
+	@Column(name = "user_role",nullable = false)
 	private String role;
 
-	@Column(name = "password")
-	private String password;
-	
-	@Column(name = "date_created")
-	private Date createdDate;
-	
-	@Column(name = "date_modify")
-	private Date modifyDate;
-	
-	@Column(name = "isdeleted")
-	private boolean isDeleted;
+	@Column(name = "password",nullable = false)
+	private String password;	
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -66,10 +48,11 @@ public class Users implements UserDetails{
 
 	@Override
 	public String getUsername() {
-		return email;
+		return userId;
 	}
 
-	@Override
+	// Methods for account expiration, locking, credentials expiration, and account status
+    @Override
 	public boolean isAccountNonExpired() {
 		return true;
 	}

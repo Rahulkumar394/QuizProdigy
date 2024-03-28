@@ -9,6 +9,7 @@ import { LoginComponent } from './components/login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
   providers: [
     provideClientHydration(),
     
+    provideAnimationsAsync()
   ],
   bootstrap: [AppComponent]
 })
