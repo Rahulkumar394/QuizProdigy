@@ -1,0 +1,121 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  background-color: rgb(33, 33, 33);
+}
+
+#heading {
+  text-align: center;
+  margin: 10px 0;
+  margin-left: -15px;
+  color: rgb(255, 255, 255);
+  font-size: 1.2em;
+}
+.form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50%;
+  margin-bottom: 50%;
+  flex-direction: column;
+  gap: 10px;
+  width: 20vw;
+  padding-left: 2em;
+  /* padding-right: 2em; */
+  padding-bottom: 0.4em;
+  background-color: #171717;
+  border-radius: 25px;
+  transition: 0.4s ease-in-out;
+  box-shadow: 0 4px 6px  #000;
+}
+
+.form:hover {
+  transform: scale(1);
+  border: 1px solid black;
+}
+.form__group {
+  position: relative;
+  padding: 20px 0 0;
+  width: 100%;
+  /* max-width: 180px; */
+}
+
+.form__field {
+  font-family: inherit;
+  width: 90%;
+  border: none;
+  border-bottom: 2px solid #9b9b9b;
+  outline: 0;
+  font-size: 12px;
+  color: #fff;
+  padding: 7px 0;
+  background: transparent;
+  transition: border-color 0.2s;
+}
+
+.form__field::placeholder {
+  color: transparent;
+}
+
+.form__field:placeholder-shown ~ .form__label {
+  font-size: 15px;
+  cursor: text;
+  top: 16px;
+}
+
+.form__label {
+  position: absolute;
+  top: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 15px;
+  color: #9b9b9b;
+  pointer-events: none;
+}
+
+.form__field:focus {
+  padding-bottom: 6px;
+  font-weight: 500;
+  border-width: 3px;
+  border-image: linear-gradient(to right, #116399, #38caef);
+  border-image-slice: 1;
+}
+
+.form__field:focus ~ .form__label {
+  position: absolute;
+  top: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 17px;
+  color: #38caef;
+  font-weight: 500;
+}
+
+/* reset input */
+.form__field:required,
+.form__field:invalid {
+  box-shadow: none;
+}
+
+.field {
+  display: flex;
+  /* align-items: start; */
+  justify-content: start;
+  gap: 0.5em;
+  border-radius: 25px;
+  padding: 0.6em;
+  border: none;
+  outline: none;
+  color: white;
+}
+
+button{
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: none;
+  margin-bottom: 10px;
+  margin-left: -20px;
+  background-color: rgb(255, 0, 0);
+}
