@@ -44,6 +44,8 @@ public class CommonController {
     @PostMapping("/register-teacher")
     public ResponseEntity<Response> registerTeacher(@RequestBody Teachers teacher) {
 
+        System.out.println("<=====Common controller RegisterTeacher()=====>\n"+teacher);
+
         Response registerResponse = new Response();
         boolean isRegister =teacherService.addTeacher(teacher);
 
@@ -61,6 +63,7 @@ public class CommonController {
     @PostMapping("/register-student")
     public ResponseEntity<Response> RegisterStudent(@RequestBody Students students) {
 
+        System.out.println("<=====Common controller RegisterStudent()=====>\n"+students);
         Response registerResponse = new Response();
         boolean isRegister = studentService.addStudent(students);
 
@@ -77,6 +80,8 @@ public class CommonController {
     @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest) {
+
+        System.out.println("<=====Common controller login()=====>\n"+loginRequest);
 
         this.doAuthenticate(loginRequest.getUserId(), loginRequest.getPassword());
         LoginResponse loginResponse = userService.loginUser(loginRequest);

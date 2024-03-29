@@ -9,6 +9,7 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.quizprodigy.common.Validation;
@@ -27,6 +28,7 @@ import com.quizprodigy.repository.UserRepository;
 import com.quizprodigy.request.SetQuestionAnswerRequest;
 import com.quizprodigy.response.ExamQuestionAnswerResponse;
 
+@Service
 public class TeacherService {
 
     @Autowired
@@ -49,7 +51,7 @@ public class TeacherService {
     @Transactional
     public boolean addTeacher(Teachers teachers) {
 
-        Users findUser = userRepository.findByuserId(teachers.getTeacherId());
+        Users findUser = userRepository.findByUserId(teachers.getTeacherId());
 
         // Check if the user does not already exist
         if (findUser == null) {
@@ -75,7 +77,7 @@ public class TeacherService {
                 Users users = new Users();
                 users.setUserId(teachers.getTeacherId());
                 users.setUserName(teachers.getTeacherName());
-                users.setRole("teacher");
+                users.setRole("Teacher");
                 users.setPassword(teachers.getPassword());
 
                 // Save both entities in a transaction
@@ -240,6 +242,7 @@ public class TeacherService {
         }
 
         // Check if the exam already exists in the database
+        @SuppressWarnings("null")
         Optional<Exam> existingExamOptional = examRepository.findById(exam.getExamId());
         if (existingExamOptional.isPresent()) {
             Exam existingExam = existingExamOptional.get();
@@ -254,6 +257,7 @@ public class TeacherService {
             // Update Questions, Options, and Answers
             for (Question question : questions) {
                 // Check if the question already exists in the database
+                @SuppressWarnings("null")
                 Optional<Question> existingQuestionOptional = questionRepository.findById(question.getQuestionId());
                 if (existingQuestionOptional.isPresent()) {
                     Question existingQuestion = existingQuestionOptional.get();

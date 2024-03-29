@@ -9,11 +9,6 @@ export class LoginService {
   constructor(private http: HttpClient) {}
 
   login(data: any) {
-    const headers = new HttpHeaders().set(
-      'Authorization',
-      'Bearer ' + Cookie.get('token')
-    );
-
-    return this.http.post('http://localhost:8080/login', data, { headers });
+     return this.http.post('http://localhost:8080/login', data);
   }
 }

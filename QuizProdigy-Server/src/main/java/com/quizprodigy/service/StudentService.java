@@ -2,6 +2,7 @@ package com.quizprodigy.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.quizprodigy.common.Validation;
@@ -10,6 +11,7 @@ import com.quizprodigy.entity.Users;
 import com.quizprodigy.repository.StudentRepository;
 import com.quizprodigy.repository.UserRepository;
 
+@Service
 public class StudentService {
     @Autowired
     private UserRepository userRepository;
@@ -23,7 +25,7 @@ public class StudentService {
     @Transactional
     public boolean addStudent(Students students) {
 
-        Users findUser = userRepository.findByuserId(students.getStudentId());
+        Users findUser = userRepository.findByUserId(students.getStudentId());
 
         // Check if the user does not already exist
         if (findUser == null) {
@@ -49,13 +51,12 @@ public class StudentService {
                 Users users = new Users();
                 users.setUserId(students.getStudentId());
                 users.setUserName(students.getStudentName());
-                users.setRole("teacher");
+                users.setRole("Student");
                 users.setPassword(students.getPassword());
 
                 // Save both entities in a transaction
                 students = studentRepository.save(students);
                 users = userRepository.save(users);
-
                 return true; // Successfully saved both entities
             }
         }

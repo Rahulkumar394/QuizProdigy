@@ -37,7 +37,8 @@ public class SecurityConfiguration {
 
 		http.csrf(csrf -> csrf.disable())
 				.authorizeHttpRequests(requests -> requests.requestMatchers("/login").permitAll()
-						.requestMatchers("/register").permitAll()
+						.requestMatchers("/register-student").permitAll()
+						.requestMatchers("/register-teacher").permitAll()
 						.anyRequest().authenticated())
 				.exceptionHandling(ex -> ex.authenticationEntryPoint(point))
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));

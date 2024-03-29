@@ -1,40 +1,150 @@
 <div class="container">
-    <form class="form">
-        <p id="heading">Register</p>
-        <div class="form__group field">
-            <input type="input" class="form__field" placeholder="Name" required="">
-            <label for="name" class="form__label">First Name</label>
-        </div>
-        <div class="form__group field">
-            <input type="input" class="form__field" placeholder="Name" required="">
-            <label for="name" class="form__label">Last Name</label>
-        </div>
-        <div class="form__group field">
-            <input type="input" class="form__field" placeholder="Name" required="">
-            <label for="name" class="form__label">Email</label>
-        </div>
-        <div class="form__group field">
-            <input type="input" class="form__field" placeholder="Name" required="">
-            <label for="name" class="form__label">Contact Number</label>
-        </div>
-        <div class="form__group field">
-            <input type="input" class="form__field" placeholder="Name" required="">
-            <label for="name" class="form__label">College Name</label>
-        </div>
-        <div class="form__group field">
-            <input type="input" class="form__field" placeholder="Name" required="">
-            <label for="name" class="form__label">Enrollment Number</label>
-        </div>
-        <div class="form__group field">
-            <input type="password" class="form__field" placeholder="Name" required="">
-            <label for="name" class="form__label">Password</label>
-        </div>
-        <div class="form__group field">
-            <input type="password" class="form__field" placeholder="Name" required="">
-            <label for="name" class="form__label">Confirm Password</label>
-        </div>
+  <form class="form" [formGroup]="registerForm" (ngSubmit)="register()">
+    <p id="heading">Register</p>
+    <div class="radio-btn">
+      <div class="form__group field radio">
+        <input
+          type="radio"
+          placeholder="Name"
+          id="role"
+          name="role"
+          value="Student"
+          style="margin-top: 0; cursor: pointer"
+          (click)="toggleStudent()"
+          formControlName="role"
+          checked
+        />
+        <label for="role" style="cursor: pointer">Student</label>
+      </div>
 
+      <div class="form__group field radio">
+        <input
+          type="radio"
+          placeholder="Name"
+          id="role2"
+          name="role"
+          value="Teacher"
+          style="margin-top: 0; cursor: pointer"
+          (click)="toggleTeacher()"
+          formControlName="role"
+        />
+        <label for="role2" style="cursor: pointer">Teacher</label>
+      </div>
+    </div>
 
-        <button>Register</button>
-    </form>
+    <div class="input-box">
+      <div class="form__group field">
+        <input
+          type="input"
+          class="form__field"
+          placeholder="Name"
+          required
+          formControlName="name"
+        />
+        <label for="name" class="form__label">Name</label>
+      </div>
+
+      <div class="form__group field">
+        <input
+          type="email"
+          class="form__field"
+          placeholder="Name"
+          required
+          formControlName="email"
+        />
+        <label for="name" class="form__label">Email</label>
+      </div>
+    </div>
+
+    <div class="input-box">
+      <div class="form__group field">
+        <input
+          type="tel"
+          inputmode="numeric"
+          pattern="[0-9]*"
+          class="form__field"
+          placeholder="Contact Number"
+          maxlength="10"
+          required
+          formControlName="contactNumber"
+        />
+        <label for="name" class="form__label">Contact Number</label>
+      </div>
+
+      <div class="form__group field">
+        <input
+          type="input"
+          class="form__field"
+          placeholder="Name"
+          required
+          formControlName="instituteName"
+        />
+        <label for="name" class="form__label">Institute Name</label>
+      </div>
+    </div>
+
+    <div class="input-box">
+      <div class="form__group field">
+        <input
+          type="input"
+          class="form__field"
+          placeholder="Name"
+          required
+          formControlName="department"
+        />
+        <label for="name" class="form__label">Department Name</label>
+      </div>
+      <div class="form__group field" *ngIf="student">
+        <input
+          type="input"
+          class="form__field"
+          placeholder="Name"
+          required
+          formControlName="enrollment"
+        />
+        <label for="name" class="form__label">Enrollment No</label>
+      </div>
+      <div class="form__group field" *ngIf="teacher">
+        <input
+          type="input"
+          class="form__field"
+          placeholder="Name"
+          required
+          formControlName="employeeNo"
+        />
+        <label for="name" class="form__label">Employee No</label>
+      </div>
+    </div>
+
+    <div class="input-box">
+      <div class="form__group field">
+        <input
+          type="password"
+          class="form__field"
+          placeholder="Name"
+          required
+          formControlName="password"
+        />
+        <label for="name" class="form__label">Password</label>
+      </div>
+      <div class="form__group field">
+        <input
+          type="password"
+          class="form__field"
+          placeholder="Name"
+          required
+          formControlName="cnfPassword"
+        />
+        <label for="name" class="form__label">Confirm Password</label>
+      </div>
+    </div>
+
+    <button type="submit" class="btn" *ngIf="student">
+      Register as Student !
+    </button>
+
+    <button type="submit" class="btn" *ngIf="teacher">
+      Register as Teacher !
+    </button>
+  </form>
 </div>

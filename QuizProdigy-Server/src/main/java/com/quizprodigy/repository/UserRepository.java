@@ -8,5 +8,5 @@ import com.quizprodigy.entity.Users;
 
 @Repository
 public interface UserRepository extends JpaRepository<Users, String> {
-	public Users findByuserId(String userId);
+	public Users findByUserId(String userId);
 }

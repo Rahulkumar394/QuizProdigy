@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.quizprodigy.entity.Exam;
 import com.quizprodigy.entity.Question;
+
 @Repository
 public interface QuestionRepository extends JpaRepository<Question , String>{
 

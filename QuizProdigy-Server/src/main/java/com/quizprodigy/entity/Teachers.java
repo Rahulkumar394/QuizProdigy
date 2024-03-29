@@ -15,7 +15,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@SuppressWarnings("serial")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -25,42 +24,41 @@ import lombok.ToString;
 @Entity
 public class Teachers {
 
-    
 	@Id
-	@Column(name = "teacher_id")// id will by email
+	@Column(name = "teacher_id") // id will by email
 	private String teacherId;
 
-	@Column(name = "teacher_name",nullable = false)
+	@Column(name = "teacher_name", nullable = false)
 	private String teacherName;
 
-    @Column(name = "teacher_department",nullable = false)
+	@Column(name = "teacher_department", nullable = false)
 	private String teacherDepartment;
 
-	@Column(name = "contact_no",unique =  true, nullable=false)
-	private String contactNo;	
-	
-    @Column(name = "institute_name")
+	@Column(name = "contact_no", unique = true, nullable = false)
+	private String contactNo;
+
+	@Column(name = "institute_name")
 	private String instituteName;
 
-	@Column(name = "employee_no",unique =  true)
-	private String EmployeeNo;
+	@Column(name = "employee_no", unique = true)
+	private String employeeNo;
 
-	@Column(name = "status",nullable = false)
+	@Column(name = "status", nullable = false)
 	private String status;
 
-    @Column(name = "created_date",nullable = false)
+	@Column(name = "created_date", nullable = false)
 	private Date createdDate;
-	
+
 	@Column(name = "modify_date")
 	private Date modifyDate;
-	
-	@Column(name = "isdeleted",nullable = false)
+
+	@Column(name = "isdeleted", nullable = false)
 	private boolean isDeleted;
 
-	@Transient// Through this annotation  we can tell Hibernate not to persist this field.
-    private String password;
+	@Transient // Through this annotation we can tell Hibernate not to persist this field.
+	private String password;
 
-	@OneToMany(mappedBy = "teacher")
-    private List<Exam> exams;
+	@OneToMany(mappedBy = "teacherId")
+	private List<Exam> exams;
 
 }
