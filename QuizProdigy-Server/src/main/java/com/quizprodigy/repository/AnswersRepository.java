@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import com.quizprodigy.entity.Answers;
 import com.quizprodigy.entity.Question;
+
 @Repository
 public interface AnswersRepository  extends JpaRepository<Answers, String>{
 

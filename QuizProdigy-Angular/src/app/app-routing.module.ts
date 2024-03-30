@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { RegistrationComponent } from './components/registration/registration.component';
-import { TeacherModule } from './teacher/teacher.module';
+import { TeacherModule } from './components/modules/teacher/teacher.module';
 
 const routes: Routes = [
   {
@@ -15,7 +15,7 @@ const routes: Routes = [
   },
   {
     path:"teacher",
-    loadChildren:()=>import('./teacher/teacher.module').then(m=>m.TeacherModule),
+    loadChildren:()=>import('./components/modules/teacher/teacher.module').then(m=>m.TeacherModule),
     
   },
 ];

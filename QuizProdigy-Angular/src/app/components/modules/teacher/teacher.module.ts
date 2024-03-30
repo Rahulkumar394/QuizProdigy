@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { TeacherDashboardComponent } from './teacher-dashboard/teacher-dashboard.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { TeacherRoutingModule } from './teacher-routing.module';
 
 // Material
@@ -17,13 +17,13 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { ReactiveFormsModule } from '@angular/forms';
-import { SetQuestionPaperComponent } from './components/set-question-paper/set-question-paper.component';
+import { SetPaperComponent } from './components/set-paper/set-paper.component';
 
 @NgModule({
   declarations: [
-    TeacherDashboardComponent,
+    DashboardComponent,
     NavbarComponent,
-    SetQuestionPaperComponent,
+    SetPaperComponent
   ],
   imports: [
     CommonModule,

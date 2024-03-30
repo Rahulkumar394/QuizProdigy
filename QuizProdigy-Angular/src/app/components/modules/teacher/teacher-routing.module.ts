@@ -1,20 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { TeacherDashboardComponent } from './teacher-dashboard/teacher-dashboard.component';
-import { SetQuestionPaperComponent } from './components/set-question-paper/set-question-paper.component';
+import { SetPaperComponent } from './components/set-paper/set-paper.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 const routes: Routes = [
   {
     path:'',
-    component:TeacherDashboardComponent,
+    component:DashboardComponent,
     children:[
       {
         path:"setPaper",
-        component:SetQuestionPaperComponent
+        component:SetPaperComponent
       }
     ]
   },
-  
 ];
 
 @NgModule({

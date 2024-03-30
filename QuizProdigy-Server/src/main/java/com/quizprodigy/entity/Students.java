@@ -16,7 +16,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@SuppressWarnings("serial")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -41,7 +40,7 @@ public class Students {
 	private String instituteName;
 
 	@Column(name = "enrollment",unique =  true)
-	private String Enrollment;
+	private String enrollment;
 
 	@Column(name = "status",nullable = false)
 	private String status;

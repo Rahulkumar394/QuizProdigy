@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 
 @Component({
-  selector: 'app-set-question-paper',
-  templateUrl: './set-question-paper.component.html',
-  styleUrl: './set-question-paper.component.css',
+  selector: 'app-set-paper',
+  templateUrl: './set-paper.component.html',
+  styleUrl: './set-paper.component.css'
 })
-export class SetQuestionPaperComponent {
+export class SetPaperComponent {
   loginForm!: FormGroup<any>;
   doLogin() {
     throw new Error('Method not implemented.');
@@ -24,3 +24,4 @@ export class SetQuestionPaperComponent {
     this.answers.push([]);
   }
 }
+

@@ -2,7 +2,6 @@ package com.quizprodigy.entity;
 
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Date;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -17,7 +16,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-@SuppressWarnings("serial")
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -25,20 +24,20 @@ import lombok.ToString;
 @ToString
 @Builder
 @Entity
-public class Users implements UserDetails{
-	
+public class Users implements UserDetails {
+
 	@Id
-	@Column(name = "user_id")//will be email
+	@Column(name = "user_id") // will be email
 	private String userId;
 
-	@Column(name = "user_name",nullable = false)
+	@Column(name = "user_name", nullable = false)
 	private String userName;
 
-	@Column(name = "user_role",nullable = false)
+	@Column(name = "user_role", nullable = false)
 	private String role;
 
-	@Column(name = "password",nullable = false)
-	private String password;	
+	@Column(name = "password", nullable = false)
+	private String password;
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -51,8 +50,9 @@ public class Users implements UserDetails{
 		return userId;
 	}
 
-	// Methods for account expiration, locking, credentials expiration, and account status
-    @Override
+	// Methods for account expiration, locking, credentials expiration, and account
+	// status
+	@Override
 	public boolean isAccountNonExpired() {
 		return true;
 	}
