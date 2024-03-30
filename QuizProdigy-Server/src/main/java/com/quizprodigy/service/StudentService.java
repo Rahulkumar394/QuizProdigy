@@ -1,5 +1,7 @@
 package com.quizprodigy.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -20,7 +22,7 @@ public class StudentService {
     private StudentRepository studentRepository;
 
     @Autowired
-	private PasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder;
 
     @Transactional
     public boolean addStudent(Students students) {
@@ -45,7 +47,7 @@ public class StudentService {
                 java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
                 students.setCreatedDate(sqlDate);
                 students.setModifyDate(sqlDate);
-                students.setStatus("pending");
+                students.setStatus("Pending");
 
                 // Create users entity object and save it to the database
                 Users users = new Users();
@@ -61,5 +63,10 @@ public class StudentService {
             }
         }
         return false; // User already exists or validation failed
+    }
+
+    // Getting all teaches whose status is "pending"
+    public List<Students> getStudentsByStatus(String status) {
+        return studentRepository.findAllStudentsByStatus(status);
     }
 }
