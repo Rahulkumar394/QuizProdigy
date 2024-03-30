@@ -1,0 +1,28 @@
+<!-- <p>set-question-paper works!</p> -->
+<div class="container">
+    <mat-card class="card">
+      <form>
+        <div *ngFor="let question of questions; let qIndex = index" class="question-container">
+          <div class="input-container">
+            <input style="color: aliceblue" type="text" id="question{{ qIndex }}" required />
+            <label for="question{{ qIndex }}" class="label">Enter Question {{ qIndex + 1 }}</label>
+            <div class="underline"></div>
+          </div>
+  
+          <div class="answer-container">
+            <div *ngFor="let answer of answers[qIndex]; let aIndex = index" class="input-container">
+              <input style="color: aliceblue" type="text" id="answer{{ qIndex }}{{ aIndex }}" required />
+              <label for="answer{{ qIndex }}{{ aIndex }}" class="label">Answer {{ aIndex + 1 }}</label>
+              <div class="underline"></div>
+            </div>
+            <button mat-icon-button (click)="addAnswerField(qIndex)">
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+        </div>
+  
+        <button mat-raised-button (click)="addQuestion()">Add Question</button>
+      </form>
+    </mat-card>
+  </div>
+  

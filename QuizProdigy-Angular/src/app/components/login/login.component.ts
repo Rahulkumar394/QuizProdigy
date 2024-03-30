@@ -17,7 +17,11 @@ import Swal from 'sweetalert2';
 export class LoginComponent implements OnInit {
   emailCheck: boolean = true;
 
-  constructor(private formBuilder: FormBuilder, private router: Router,private loginService : LoginService) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private loginService: LoginService
+  ) {}
 
   loginForm = new FormGroup({
     email: new FormControl(''),
@@ -35,7 +39,7 @@ export class LoginComponent implements OnInit {
     const success = 'Logged In Successfully';
     const errorMessage = 'Please Try Again';
 
-    if(!this.validateEmail(this.loginForm.value.email)){
+    if (!this.validateEmail(this.loginForm.value.email)) {
       Swal.fire({
         title: 'Error!',
         text: 'Invalid Email Address',
@@ -44,13 +48,14 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-
-    this.loginService.login(this.loginForm.value).subscribe((data:any)=>{
-      console.log(success + data)
-    },(error:any)=>{
+    this.loginService.login(this.loginForm.value).subscribe(
+      (data: any) => {
+        console.log(success + data);
+      },
+      (error: any) => {
         console.log(errorMessage + error);
-    })
-
+      }
+    );
   }
 
   validateEmail(email: any) {
@@ -60,6 +65,6 @@ export class LoginComponent implements OnInit {
       this.emailCheck = false;
     } else this.emailCheck = true;
 
-    return this.emailCheck
+    return this.emailCheck;
   }
 }

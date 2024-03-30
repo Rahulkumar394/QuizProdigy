@@ -45,9 +45,9 @@ public class CommonController {
     public ResponseEntity<Response> registerTeacher(@RequestBody Teachers teacher) {
 
         Response registerResponse = new Response();
-        boolean isRegister =teacherService.addTeacher(teacher);
+        boolean isRegistered =teacherService.addTeacher(teacher);
 
-        if (isRegister) {
+        if (isRegistered) {
             registerResponse.setResponseStatus("Register Successful");
             return new ResponseEntity<>(registerResponse, HttpStatus.OK);
         } else {
