@@ -73,5 +73,12 @@ public class TeacherService {
         return teacherRepository.findAllTeachersByStatus(status);
     }
 
+    // Through this method we can update status
+	@Transactional
+	public void updateStatus(String email, String status) {
+		teacherRepository.updateStatusByShopEmail(email, status);
+		return;
+	}
+
     
 }

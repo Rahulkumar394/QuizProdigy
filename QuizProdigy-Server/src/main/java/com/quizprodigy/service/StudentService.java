@@ -69,4 +69,12 @@ public class StudentService {
     public List<Students> getStudentsByStatus(String status) {
         return studentRepository.findAllStudentsByStatus(status);
     }
+
+    // Through this method we can update status
+	@Transactional
+	public void updateStatus(String email, String status) {
+		studentRepository.updateStatusByShopEmail(email, status);
+		return;
+	}
+
 }
