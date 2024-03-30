@@ -1,0 +1,93 @@
+<div class="container">
+  <mat-stepper #stepper>
+    <mat-step [stepControl]="examDetails" errorMessage="Name is required.">
+      <form class="form" [formGroup]="examDetails" (ngSubmit)="setExamDetails()">
+        <p class="title">Fill Exam Details</p>
+        <!-- <p class="message">Signup now and get full access to our app.</p> -->
+      <div class="flex">
+        <label>
+            <input class="input" type="text" placeholder="" required formControlName="examName" />
+          <span>Exam Name</span>
+        </label>
+    
+        <label>
+          <input class="input" type="number" placeholder="" required formControlName="totalQuestions" />
+          <span>Number of Questions</span>
+        </label>
+      </div>
+    
+      <label>
+        <input class="input" type="number" placeholder="" required formControlName="examDuration" />
+        <span>Duration | in minutes</span>
+      </label>
+    
+      <label>
+        <input class="input" type="text" placeholder="" required formControlName="timeAllotedPerQuestion" />
+        <span>Time Alloted per Question</span>
+      </label>
+    
+      <!-- Hands On Options -->
+    
+      <div class="handsOn">
+        <span>Hands On Exam</span>
+        <div class="radioOption">
+          <label for="yes">Yes</label>
+          <input type="radio" value="true" name="handsOn" formControlName="handsOn" />
+        </div>
+    
+        <div class="radioOption">
+          <label for="no">No</label>
+          <input type="radio" value="false" name="handsOn" checked formControlName="handsOn" />
+        </div>
+      </div>
+    
+      <!-- Hands On Options End Here -->
+    
+      <button class="submit">Next >>></button>
+    </form>
+    </mat-step>
+
+
+
+    <mat-step [stepControl]="questionDetails" errorMessage="Address is required.">
+      <form [formGroup]="questionDetails">
+        <div *ngFor="let question of questions; let qIndex = index" class="question-container">
+          <div class="input-container">
+            <input style="color: aliceblue" type="text" [id]="'question' + qIndex" formControlName="question{{qIndex}}" required />
+            <label [for]="'question' + qIndex" class="label">Enter Question {{ qIndex + 1 }}</label>
+            <div class="underline"></div>
+          </div>
+    
+          <div class="answer-container">
+            <div *ngFor="let answer of answers[qIndex]; let aIndex = index" class="input-container">
+              <input style="color: aliceblue" type="text" [id]="'answer' + qIndex + aIndex" formControlName="answer{{qIndex}}{{aIndex}}" required />
+              <label [for]="'answer' + qIndex + aIndex" class="label">Option {{ aIndex + 1 }}</label>
+              <div class="underline"></div>
+            </div>
+            <!-- Add input field for answer -->
+            <input style="color: aliceblue" type="text" [id]="'answer' + qIndex" formControlName="answer{{qIndex}}" required />
+            <label [for]="'answer' + qIndex" class="label">Enter Answer</label>
+            <div class="underline"></div>
+            <button mat-raised-button (click)="addAnswerField(qIndex)">Add Option <mat-icon>add</mat-icon></button>
+          </div>
+        </div>
+    
+        <button mat-raised-button (click)="addQuestion()">Add Question <mat-icon>add</mat-icon></button>
+      </form>
+    </mat-step>
+    
+
+
+
+
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      <p>You are now done.</p>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+      </div>
+    </mat-step>
+  </mat-stepper>
+  
+</div>

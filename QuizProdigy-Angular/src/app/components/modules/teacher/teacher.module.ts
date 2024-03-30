@@ -15,15 +15,19 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import {MatStepperModule} from '@angular/material/stepper';
+
 
 import { ReactiveFormsModule } from '@angular/forms';
 import { SetPaperComponent } from './components/set-paper/set-paper.component';
+import { SetExamComponent } from './components/set-exam/set-exam.component';
 
 @NgModule({
   declarations: [
     DashboardComponent,
     NavbarComponent,
-    SetPaperComponent
+    SetPaperComponent,
+    SetExamComponent
   ],
   imports: [
     CommonModule,
@@ -39,6 +43,8 @@ import { SetPaperComponent } from './components/set-paper/set-paper.component';
     MatFormFieldModule,
     MatInputModule,
     MatCardModule,
+    MatStepperModule,
+    
   ],
 })
 export class TeacherModule {}

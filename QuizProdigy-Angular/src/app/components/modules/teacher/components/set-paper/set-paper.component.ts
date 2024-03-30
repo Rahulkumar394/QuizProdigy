@@ -8,9 +8,7 @@ import { FormGroup } from '@angular/forms';
 })
 export class SetPaperComponent {
   loginForm!: FormGroup<any>;
-  doLogin() {
-    throw new Error('Method not implemented.');
-  }
+  
 
   questions: any[] = [{}]; // Initialize with an empty question
   answers: any[][] = [[]]; // Initialize with an empty answer field for each question
