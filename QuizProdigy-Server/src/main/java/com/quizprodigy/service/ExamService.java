@@ -45,13 +45,17 @@ public class ExamService {
         // Creation answerList object
         List<Answers> answersList = new ArrayList<>();
         // this flag  is used to check exam is set or not in database 
-        boolean isSetExam = true;
+        boolean isSetExam = true;     
+        // Make ExamId
+        long totalNoOfExamIdCount = examRepository.count() + 1; // Get total count of exams in the repository
+        String  examId="EXAM-"+totalNoOfExamIdCount;// Set the Exam ID EXAM-1
 
         for (SetQuestionAnswerRequest q : questions) {
             Exam exam = q.getExam();
+            exam.setExamId(examId);
             // Validate Exam object
             if (isSetExam) {
-                if (exam.getExamId() != null && exam.getSubjectName().length() >= 2 && exam.getTotalQuestions() >= 1
+                if (exam.getSubjectName().length() >= 2 && exam.getTotalQuestions() >= 1
                         && exam.getTotalTime() >= 1) {
 
                     java.util.Date utilDate = new java.util.Date(); // Create a java.util.Date object
