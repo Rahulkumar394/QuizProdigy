@@ -1,0 +1,92 @@
+<mat-toolbar>
+  <button mat-icon-button (click)="sidenav.toggle()" id="menuIcon">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span id="menuTitle">QuizProdigy</span>
+  <div class="nav-buttons">
+    <a mat-button routerLink="/admin/home" class="top-menu-item">Home</a>
+    <a mat-button routerLink="/admin/home" class="top-menu-item">Contact</a>
+    <a mat-button routerLink="/admin/home" class="top-menu-item">Logout</a>
+  </div>
+</mat-toolbar>
+
+<mat-sidenav-container>
+  <mat-sidenav
+    #sidenav
+    [fixedInViewport]="true"
+    [fixedTopGap]="70"
+    mode="side"
+    opened=""
+  >
+    <div>
+      <!-- routerLink="/admin/manage-student" -->
+      <a mat-button (click)="selectStudent()" class="side-menu-item"
+        >Manage Student</a
+      >
+    </div>
+    <div *ngIf="toggleStudent" class="sub-option">
+      <div>
+        <a mat-button routerLink="/admin/manage-student" class="side-menu-item"
+          >Student Information</a
+        >
+      </div>
+    </div>
+
+    <div>
+      <a
+        mat-button
+        routerLink="/admin/manage-teacher"
+        class="side-menu-item"
+        (click)="selectTeacher()"
+        >Manage Teacher</a
+      >
+    </div>
+    <div *ngIf="toggleTeacher" class="sub-option">
+      <div>
+        <a mat-button routerLink="/admin/manage-teacher" class="side-menu-item"
+          >Teacher Information</a
+        >
+      </div>
+      <div>
+        <a mat-button routerLink="/admin/manage-teacher" class="side-menu-item"
+          >Reuest Teacher</a
+        >
+      </div>
+    </div>
+    <div>
+      <a mat-button routerLink="/admin/manage-exam" class="side-menu-item" (click)="selectExam()"
+        >Manage Exam</a
+      >
+    </div>
+    <div *ngIf="toggleExam" class="sub-option">
+      <div>
+        <a mat-button routerLink="" class="side-menu-item">All Exam Details</a>
+      </div>
+    </div>
+    <div>
+      <a mat-button routerLink="/admin/manage-result" class="side-menu-item" (click)="selectResult()"
+        >Manage Result</a
+      >
+    </div>
+    <div *ngIf="toggleResult" class="sub-option">
+      <div>
+        <a mat-button routerLink="" class="side-menu-item">Set Result Cutoff </a>
+      </div>
+      <div>
+        <a mat-button routerLink="" class="side-menu-item">Pass students </a>
+      </div>
+      <div>
+        <a mat-button routerLink="" class="side-menu-item">Result Send  to Student </a>
+      </div>
+    
+    </div>
+    <div>
+      <a mat-button routerLink="/admin/chat" class="side-menu-item"
+        >Chat Room</a
+      >
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet> </router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

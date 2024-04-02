@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.quizprodigy.entity.Students;
 import com.quizprodigy.request.SetQuestionAnswerRequest;
-import com.quizprodigy.response.ExamQuestionAnswerResponse;
 import com.quizprodigy.response.Response;
 import com.quizprodigy.service.ExamService;
 import com.quizprodigy.service.StudentService;
@@ -31,7 +30,7 @@ public class TeacherController {
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/set-exam-question")
 	@Secured("Teacher")
-	public ResponseEntity<Response> setExamQuestion(@RequestBody List<SetQuestionAnswerRequest> questions) {
+	public ResponseEntity<Response> setExamQuestion(@RequestBody SetQuestionAnswerRequest questions) {
 
 		System.out.println("<=====>TeacherController  setExamQuestion()=====>\n" + questions);
 		boolean isSuccessful = examService.setExamQuestionPaper(questions);
@@ -47,10 +46,10 @@ public class TeacherController {
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/exam/{examId}")
 	@Secured("Teacher")
-	public ResponseEntity<ExamQuestionAnswerResponse> getExamDetailsByExamId(@PathVariable String examId) {
+	public ResponseEntity<SetQuestionAnswerRequest> getExamDetailsByExamId(@PathVariable String examId) {
 
 		System.out.println("<=====>TeacherController getExamDetailsByExamId()=====>\n" + examId);
-		ExamQuestionAnswerResponse examDetails = examService.getExamDetailsByID(examId);
+		SetQuestionAnswerRequest examDetails = examService.getExamDetailsById(examId);
 		if (examDetails != null)
 			return ResponseEntity.status(HttpStatus.OK).body(examDetails);
 		else
@@ -61,7 +60,7 @@ public class TeacherController {
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/set-exam-question")
 	@Secured("Teacher")
-	public ResponseEntity<Response> updateExamQuestion(@RequestBody ExamQuestionAnswerResponse updateQuestion) {
+	public ResponseEntity<Response> updateExamQuestion(@RequestBody SetQuestionAnswerRequest updateQuestion) {
 
 		System.out.println("<=====>TeacherController  setExamQuestion()=====>\n" + updateQuestion);
 		boolean isSuccessful = examService.updateExamQuestionAnswer(updateQuestion);
@@ -87,8 +86,6 @@ public class TeacherController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
 					.body(new Response("Error while deleting exam"));
 	}
-
-	////////////////////////////////
 
 	// Through this API we get all Students whose status is "Pending" (account is
 	// not activated yet)

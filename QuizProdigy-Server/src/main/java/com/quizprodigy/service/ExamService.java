@@ -9,6 +9,7 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.quizprodigy.dto.QuestionDto;
 import com.quizprodigy.entity.Answers;
 import com.quizprodigy.entity.Exam;
 import com.quizprodigy.entity.Options;
@@ -32,10 +33,11 @@ public class ExamService {
     private AnswersRepository answersRepository;
 
     // Through this method we can set Exam and Question Answer
-    public boolean setExamQuestionPaper(List<SetQuestionAnswerRequest> questions) {
+    public boolean setExamQuestionPaper(SetQuestionAnswerRequest questions) {
 
         // If the input parameter is null, return false indicating failure
-        if(questions == null || questions.isEmpty()) return false;
+        if (questions == null)
+            return false;
 
         // Now we will Validate question list from here
         // Creating QuestionList object
@@ -44,93 +46,74 @@ public class ExamService {
         List<Options> optionsList = new ArrayList<>();
         // Creation answerList object
         List<Answers> answersList = new ArrayList<>();
-        // this flag  is used to check exam is set or not in database 
-        boolean isSetExam = true;     
+
+        // Extract Exam and Question Details From Request Object
+        Exam exam = questions.getExam();
+        List<QuestionDto> questionDtos = questions.getQuestions();
+
         // Make ExamId
         long totalNoOfExamIdCount = examRepository.count() + 1; // Get total count of exams in the repository
-        String  examId="EXAM-"+totalNoOfExamIdCount;// Set the Exam ID EXAM-1
+        exam.setExamId("EXAM-" + totalNoOfExamIdCount);// Set the Exam ID EXAM-1
+        if (exam.getSubjectName().length() >= 2 && exam.getTotalQuestions() >= 1 && exam.getTotalTime() >= 1) {
 
-        for (SetQuestionAnswerRequest q : questions) {
-            Exam exam = q.getExam();
-            exam.setExamId(examId);
-            // Validate Exam object
-            if (isSetExam) {
-                if (exam.getSubjectName().length() >= 2 && exam.getTotalQuestions() >= 1
-                        && exam.getTotalTime() >= 1) {
+            java.util.Date utilDate = new java.util.Date(); // Create a java.util.Date object
+            java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime()); // Convert java.util.Date to java.sql.Date
+            exam.setCreatedDate(sqlDate); // Set created date
+            exam.setModifyDate(sqlDate); // Set modify date
+            exam.setDelete(false); // Set delete flag to false
+            exam = examRepository.save(exam); // saving exam in database
 
-                    java.util.Date utilDate = new java.util.Date(); // Create a java.util.Date object
-                    java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime()); // Convert java.util.Date to
-                                                                                   // java.sql.Date
-                    exam.setCreatedDate(sqlDate); // Set created date
-                    exam.setModifyDate(sqlDate); // Set modify date
-                    exam.setDelete(false); // Set delete flag to false
-                    examRepository.save(exam); // saving exam in database
-                    isSetExam = false;
-                }else
-                return false;// Exam validation failed
+            if (exam != null) {
+                for (QuestionDto q : questionDtos) {
+                    // Setting question fields
+                    Question question = q.getQuestion();
+                    question.setExam(exam); // Setting up foreign key reference
+                    question.setQuestionId(UUID.randomUUID().toString()); // Generating random UUID as Question Id
+
+                    // Setting option
+                    List<Options> oList = q.getOptions();
+                    for (Options option : oList) {
+                        Options opt = new Options();
+                        opt.setOptionId(UUID.randomUUID().toString());
+                        opt.setOptionValue(option.getOptionValue());
+                        opt.setQuestion(question); // Setting up Foreign Key Reference
+                        optionsList.add(opt);
+                    }
+
+                    // setting answer
+                    List<Answers> ansList = q.getAnswer();
+                    for (Answers ans : ansList) {
+                        Answers answer = new Answers();
+                        answer.setAnswerId(UUID.randomUUID().toString());
+                        answer.setCorrectAnswer(ans.getCorrectAnswer());
+                        answer.setQuestion(question); // Setting up Foreign Key Reference
+                        ansList.add(answer);
+                    }
+
+                    // Setting question Remaning Fields
+                    question.setOptions(optionsList); // Adding all Option list to question Object
+                    question.setAnswer(ansList); // Adding Answer list to question Object
+                    questionsList.add(question); // Add question to the list of questions
+
+                }
+                // saving all the questions in database
+                questionRepository.saveAll(questionsList);
+                // saving all Optionlist in database
+                optionsRepository.saveAll(optionsList);
+                // saving all Answer in database
+                answersRepository.saveAll(answersList);
+                return true; // successful creation of Exam and Questions
             }
-
-            // Creating Question object
-            Question question = new Question();
-            // Creating OptionsLisy object
-            List<Options> options = new ArrayList<>();
-            // Creation answer object
-            Answers answers = new Answers();
-
-            // Setting values in Question Object
-            question.setQuestionId(UUID.randomUUID().toString()); // Generate UUID for question ID
-            question.setQuestion(q.getQuestion()); // Set question text
-            question.setExam(exam); // Associate question with exam
-
-            // setting values in OptionsList Object
-            Map<Character, String> optionMap = q.getOptions();
-            for (Map.Entry<Character, String> entry : optionMap.entrySet()) {
-                Character key = entry.getKey();
-                String value = entry.getValue();
-
-                Options option = new Options();
-                option.setOptionId(UUID.randomUUID().toString()); // Generate UUID for option ID
-                option.setOptionName(key); // Set option name (A, B, C, etc.)
-                option.setOptionValue(value); // Set option value (text)
-                option.setQuestion(question); // Associate option with question
-                // set single option in option List
-                options.add(option);
-            }
-
-            // setting values in Answer Object
-            answers.setAnswerId(UUID.randomUUID().toString()); // Generate UUID for answer ID
-            char[] ans = q.getAnswer().toCharArray();// Convert the answer String to a char array
-            Arrays.sort(ans);// Sort the characters in the answer array in ascending order
-            // Convert the sorted char array back to a String and set it as the correct
-            // option for the answer
-            answers.setCorrectOption(ans.toString());
-            answers.setQuestion(question); // Associate answer with question
-
-            // set optionList in question object
-            question.setOptions(options);
-            for (Options opt : options) {
-                optionsList.add(opt); // Add options to optionsList for saving later
-            }
-            // set question in questionList object
-            questionsList.add(question); // Add question to questionsList for saving later
-            // set answer in answerList object
-            answersList.add(answers); // Add answer to answersList for saving later
         }
-        // saving all the questions in database
-        questionRepository.saveAll(questionsList);
-        // saving all Optionlist in database
-        optionsRepository.saveAll(optionsList);
-        // saving all Answer in database
-        answersRepository.saveAll(answersList);
-        return true; // successful creation of Exam and Questions
+        return false; // unsuccessful creation of Exam and Question
     }
 
     // This method retrieves an existing Exam from the Database by its ExamId and
     // constructs an ExamQuestionAnswerResponse object containing exam details,
     // questions, options, and answers.
-    public ExamQuestionAnswerResponse getExamDetailsByID(String examId) {
+    public SetQuestionAnswerRequest getExamDetailsById(String examId) {
         // Initialize the response object
-        ExamQuestionAnswerResponse response = new ExamQuestionAnswerResponse();
+        SetQuestionAnswerRequest response = new SetQuestionAnswerRequest();
 
         // Retrieve the existing Exam from the repository by its ExamId
         @SuppressWarnings("null")
@@ -140,55 +123,47 @@ public class ExamService {
             Exam exam = existingExam.get();
             response.setExam(exam); // Set the Exam in the response object
 
+            List<QuestionDto> questionDtos = new ArrayList<>();
             // Retrieve the list of questions associated with the Exam
             List<Question> questions = questionRepository.findByExam(exam);
-            response.setQuestions(questions); // Set the list of questions in the response object
 
-            // Initialize lists to store options and answers
-            List<Options> options = new ArrayList<>();
-            List<Answers> answers = new ArrayList<>();
-
-            // Iterate through each question to retrieve its options and answer
             for (Question question : questions) {
+                // Create a DTO containing only the necessary fields for displaying on the
+                // front-end
+                QuestionDto questionDto = new QuestionDto();
+                questionDto.setQuestion(question);
+
                 // Retrieve the options for the current question
                 List<Options> questionOptions = optionsRepository.findByQuestion(question);
-                options.addAll(questionOptions); // Add options to the options list
+                questionDto.setOptions(questionOptions);
 
-                // Retrieve the answer for the current question
-                Answers answer = answersRepository.findByQuestion(question);
-                answers.add(answer); // Add answer to the answers list
+                // Retrieve the answers for the current question
+                List<Answers> answer = answersRepository.findByQuestion(question);
+                questionDto.setAnswer(answer);
+
+                questionDtos.add(questionDto);
             }
-
-            // Set the options and answers lists in the response object
-            response.setOptions(options);
-            response.setAnswers(answers);
+            response.setQuestions(questionDtos); // Add the list of questions to the response object
+            return response;// Return the constructed response object
         }
-
-        // Return the constructed response object
-        return response;
+        return null;
     }
 
     // This method updates the Exam, Questions, Options, and Answers if they exist
     // in the database.
-    public boolean updateExamQuestionAnswer(ExamQuestionAnswerResponse updateExam) {
-        if (updateExam == null) {
-            // If the input parameter is null, return false indicating failure
+    @SuppressWarnings("null")
+    public boolean updateExamQuestionAnswer(SetQuestionAnswerRequest updateExam) {
+        // If the input parameter is null, return false indicating failure
+        if (updateExam == null && updateExam.getExam() == null && updateExam.getQuestions() == null)
             return false;
-        }
 
+        // Extract Exam and Question Details From Request Object
         Exam exam = updateExam.getExam();
-        List<Question> questions = updateExam.getQuestions();
-        List<Options> options = updateExam.getOptions();
-        List<Answers> answers = updateExam.getAnswers();
-
-        if (exam == null || questions == null || options == null || answers == null) {
-            // If any essential data is missing, return false indicating failure
-            return false;
-        }
+        List<QuestionDto> updateQuestionDtos = updateExam.getQuestions();
 
         // Check if the exam already exists in the database
-        @SuppressWarnings("null")
         Optional<Exam> existingExamOptional = examRepository.findById(exam.getExamId());
+
         if (existingExamOptional.isPresent()) {
             Exam existingExam = existingExamOptional.get();
 
@@ -199,73 +174,34 @@ public class ExamService {
             existingExam.setPerQuestionTime(exam.getPerQuestionTime());
             existingExam.setModifyDate(new java.sql.Date(new java.util.Date().getTime()));
 
-            // Update Questions, Options, and Answers
-            for (Question question : questions) {
-                // Check if the question already exists in the database
-                @SuppressWarnings("null")
-                Optional<Question> existingQuestionOptional = questionRepository.findById(question.getQuestionId());
-                if (existingQuestionOptional.isPresent()) {
-                    Question existingQuestion = existingQuestionOptional.get();
+            for (QuestionDto questionDto : updateQuestionDtos) {
 
-                    // Update Question details
-                    existingQuestion.setQuestion(question.getQuestion());
+                // List<Question> questions = new ArrayList<>();
+                List<Options> options = new ArrayList<>();
+                List<Answers> answers = new ArrayList<>();
 
-                    // Update Options for the existing question
-                    List<Options> existingOptions = optionsRepository.findByQuestion(existingQuestion);
-                    for (Options option : options) {
-                        // Check if the option already exists for the question
-                        if (existingOptions.stream().anyMatch(opt -> opt.getOptionId().equals(option.getOptionId()))) {
-                            // Update Option details
-                            for (Options existingOption : existingOptions) {
-                                if (existingOption.getOptionId().equals(option.getOptionId())) {
-                                    // Update option value and name
-                                    existingOption.setOptionValue(option.getOptionValue()); // Update option value
-                                    existingOption.setOptionName(option.getOptionName()); // Update option name
-                                    // Save the updated Option
-                                    optionsRepository.save(existingOption);
-                                    // Break the loop as we have updated the existing option
-                                    break;
-                                }
-                            }
+                Optional<Question> questionFromDBOptional = questionRepository
+                        .findById(questionDto.getQuestion().getQuestionId());
 
-                        } else {
-                            // Add new Option for the existing question
-                            option.setQuestion(existingQuestion);
-                            // Save the new Option
-                            optionsRepository.save(option);
-                        }
-                    }
+                // Question is present in DB
+                if (questionFromDBOptional.isPresent()) {
+                    Question existingQuestion = questionFromDBOptional.get();
+                    existingQuestion.setQuestion(questionDto.getQuestion().getQuestion());
+                    existingQuestion.setOptions(questionDto.getOptions());
+                    existingQuestion.setAnswer(questionDto.getAnswer());
 
-                    // Update Answers for the existing question
-                    Answers existingAnswer = answersRepository.findByQuestion(existingQuestion);
-                    if (existingAnswer != null) {
-                        // Update Answer details
-                        existingAnswer.setCorrectOption(answers.get(0).getCorrectOption()); // Assuming there is only
-                                                                                            // one answer for a question
-                        char[] ans = existingAnswer.getCorrectOption().toCharArray();// Convert the answer String to a
-                                                                                     // char array
-                        Arrays.sort(ans);// Sort the characters in the answer array in ascending order
-                        existingAnswer.setCorrectOption(ans.toString());
-                        // Save the updated Answer
-                        answersRepository.save(existingAnswer);
-                    }
-                } else {
-                    // Add new Question
-                    question.setExam(existingExam);
-                    // Save the new Question
-                    questionRepository.save(question);
+                    questionRepository.save(existingQuestion);
+                    optionsRepository.saveAll(questionDto.getOptions());
+                    answersRepository.saveAll(questionDto.getAnswer());
                 }
             }
-            // Save/update Exam in the database
-            examRepository.save(existingExam);
-
-            // Return true indicating successful update
+            examRepository.save(exam);
             return true;
         }
-        // Return false if the exam does not exist
         return false;
     }
 
+    // Through this method, we can delete an exam from the database
     public boolean deleteExamById(String examId) {
         return examRepository.deleteByExamId(examId);
     }

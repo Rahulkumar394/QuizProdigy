@@ -1,0 +1,47 @@
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.mat-toolbar {
+  height: 70px;
+}
+
+#menuTitle {
+  margin-right: 60%;
+  margin-left: 10px;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.mat-toolbar {
+  height: 70px;
+}
+
+.side-menu-item {
+  margin: 10px;
+}
+
+.mat-sidenav {
+  width: 210px;
+  background-color: rgb(33, 33, 33);
+}
+
+.nav-buttons {
+  align-items: end;
+}
+
+.nav-buttons a {
+  margin: 5px;
+}
+
+#menuTitle {
+  margin-right: 60%;
+  margin-left: 10px;
+}
+
+.sub-option {
+  margin-left: 20px;
+
+}
