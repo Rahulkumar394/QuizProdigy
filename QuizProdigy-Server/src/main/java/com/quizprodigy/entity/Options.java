@@ -28,8 +28,8 @@ public class Options {
     @Column(name = "option_value",nullable = false)
     private String optionValue;
 
-    @Column(name = "option_name",nullable = false)
-    private char optionName;
+    // @Column(name = "option_name",nullable = false)
+    // private char optionName;
 
     @ManyToOne
     @JoinColumn(name = "question_id")

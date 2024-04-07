@@ -14,14 +14,14 @@ import com.quizprodigy.entity.Teachers;
 @Repository
 public interface TeacherRepository extends JpaRepository<Teachers, String> {
 
-    public List<Teachers> findAllTeachersByStatus(@Param("status") String status);
+	public List<Teachers> findAllTeachersByStatus(@Param("status") String status);
 
-    // Through this method we update the status of the Teacher to Accepted or rejected
+	// Through this method we update the status of the Teacher to Accepted or
+	// rejected
 	// from Pending
 	@Modifying
 	@Transactional
-	@Query("UPDATE Teachres t SET t.status = :status WHERE t.teacherId = :email")
-	void updateStatusByShopEmail(String email, String status);
-
+	@Query("UPDATE Teachers t SET t.status = :status WHERE t.teacherId = :email")
+	void updateStatusById(@Param("email") String email, @Param("status") String status);
 
 }

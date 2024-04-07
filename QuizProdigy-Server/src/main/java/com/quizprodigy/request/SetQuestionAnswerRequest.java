@@ -1,8 +1,9 @@
 package com.quizprodigy.request;
 
 
-import java.util.Map;
+import java.util.List;
 
+import com.quizprodigy.dto.QuestionDto;
 import com.quizprodigy.entity.Exam;
 
 import lombok.AllArgsConstructor;
@@ -20,10 +21,7 @@ import lombok.ToString;
 @Builder
 public class SetQuestionAnswerRequest {
 
-    private String question;
-    // Character is like (A,B,C...) and string is the answer for
-    private Map<Character, String> options;
-    private String answer;
+    private List<QuestionDto> questions;
     private Exam exam;
 
 }

@@ -76,7 +76,7 @@ public class TeacherService {
     // Through this method we can update status
 	@Transactional
 	public void updateStatus(String email, String status) {
-		teacherRepository.updateStatusByShopEmail(email, status);
+		teacherRepository.updateStatusById(email, status);
 		return;
 	}
 
