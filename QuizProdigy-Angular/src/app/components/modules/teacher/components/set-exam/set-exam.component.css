@@ -18,9 +18,13 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
 }
+#stepper{
+  width: 100%;
+}
 .container {
   height: 90vh;
   display: flex;
+  width: 100%;
   justify-content: center;
   overflow: hidden;
 }
