@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,7 +13,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@SuppressWarnings("serial")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -26,8 +26,8 @@ public class Answers {
 	@Column(name = "answer_id")// uuid
 	private String answerId;
 
-    @Column(name = "correct_option",nullable = false)
-    private String correctOption;
+    @Column(name = "correct_answer",nullable = false)
+    private String correctAnswer;
 
     @ManyToOne
     @JoinColumn(name = "question_id")

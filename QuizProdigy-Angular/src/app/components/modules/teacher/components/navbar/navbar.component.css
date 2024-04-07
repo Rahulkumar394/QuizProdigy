@@ -1,0 +1,28 @@
+.example-spacer {
+    flex: 1 1 auto;
+  }
+  
+  .mat-toolbar {
+    height: 70px;
+  }
+  .side-menu-item {
+    margin: 10px;
+  }
+  .mat-sidenav {
+    width: 250px;
+  }
+  .nav-buttons {
+    align-items: end;
+  }
+  .nav-buttons a {
+    margin: 5px;
+  }
+  #menuTitle {
+    margin-right: 60%;
+    margin-left: 10px;
+  }
+  
+  *::-webkit-scrollbar {
+    width: 0;
+  }
+  

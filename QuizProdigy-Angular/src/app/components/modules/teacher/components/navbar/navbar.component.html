@@ -1,0 +1,65 @@
+<mat-toolbar>
+    <button mat-icon-button (click)="sidenav.toggle()" id="menuIcon">
+      <mat-icon>menu</mat-icon>
+    </button>
+  
+    <span id="menuTitle">QuizProdigy</span>
+    <div class="nav-buttons">
+      <a mat-button routerLink="/teacher" class="top-menu-item">Homesdf</a>
+      <a mat-button routerLink="/teacher/setPaper" class="top-menu-item"
+        >Set Question Paper</a
+      >
+      <a mat-button routerLink="/teacher" class="top-menu-item">About</a>
+      <a mat-button routerLink="/teacher" class="top-menu-item"
+        >Contact Us</a
+      >
+    </div>
+  </mat-toolbar>
+  
+  <mat-sidenav-container>
+    <mat-sidenav #sidenav [fixedInViewport]="true" [fixedTopGap]="70" mode="side">
+      <div>
+        <a
+          (click)="sidenav.close()"
+          mat-button
+          routerLink="/admin/admin-home"
+          class="side-menu-item"
+          ><mat-icon>home</mat-icon>Home</a
+        >
+      </div>
+  
+      <div>
+        <a
+          (click)="sidenav.close()"
+          mat-button
+          routerLink="/admin/services"
+          class="side-menu-item"
+          ><mat-icon>settings</mat-icon>Services</a
+        >
+      </div>
+  
+      <div>
+        <a
+          (click)="sidenav.close()"
+          mat-button
+          routerLink="/admin/about"
+          class="side-menu-item"
+          ><mat-icon>search</mat-icon>About Us</a
+        >
+      </div>
+  
+      <div>
+        <a
+          (click)="sidenav.close()"
+          mat-button
+          routerLink="/admin/contact"
+          class="side-menu-item"
+          ><mat-icon>contact_support</mat-icon>Contact Us</a
+        >
+      </div>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <router-outlet> </router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+  

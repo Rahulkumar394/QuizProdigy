@@ -3,6 +3,7 @@
   justify-content: center;
   align-items: center;
   height: 100%;
+  width: 100%;
   background-color: rgb(33, 33, 33);
 }
 
@@ -21,7 +22,7 @@
   margin-bottom: 50%;
   flex-direction: column;
   gap: 10px;
-  width: 20vw;
+  width: 550px;
   padding-left: 2em;
   /* padding-right: 2em; */
   padding-bottom: 0.4em;
@@ -50,9 +51,14 @@
   outline: 0;
   font-size: 12px;
   color: #fff;
-  padding: 7px 0;
+  padding: 10px 0;
   background: transparent;
   transition: border-color 0.2s;
+}
+
+.radio {
+  display: flex;
+  justify-content: center;
 }
 
 .form__field::placeholder {
@@ -67,12 +73,17 @@
 
 .form__label {
   position: absolute;
-  top: 0;
+  top: -4px;
   display: block;
   transition: 0.2s;
-  font-size: 15px;
+  font-size: 14px;
   color: #9b9b9b;
   pointer-events: none;
+}
+.radio-btn{
+  width: 100%;
+  display: flex; 
+  /* gap: 10px; */
 }
 
 .form__field:focus {
@@ -85,12 +96,12 @@
 
 .form__field:focus ~ .form__label {
   position: absolute;
-  top: 0;
+  top: -8px;
   display: block;
-  transition: 0.2s;
-  font-size: 17px;
+  transition: all 0.35s ease;
+  font-size: 11px;
   color: #38caef;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 /* reset input */
@@ -100,9 +111,9 @@
 }
 
 .field {
-  display: flex;
+  /* display: flex; */
   /* align-items: start; */
-  justify-content: start;
+  /* justify-content: start; */
   gap: 0.5em;
   border-radius: 25px;
   padding: 0.6em;
@@ -111,11 +122,28 @@
   color: white;
 }
 
-button{
+.btn {
   padding: 8px 10px;
   border-radius: 8px;
   border: none;
   margin-bottom: 10px;
   margin-left: -20px;
-  background-color: rgb(255, 0, 0);
+  background-color: #128d12;
+  color: #fff;
+  transition: all 0.45s ease;
+}
+
+.btn:hover {
+  cursor: pointer;
+  background-color: #0d640d;
+}
+
+.btn:active {
+  scale: 0.95;
+}
+
+
+.input-box {
+  width: 100%;
+  display: flex;
 }

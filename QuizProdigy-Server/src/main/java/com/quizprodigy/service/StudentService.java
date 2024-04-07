@@ -1,7 +1,10 @@
 package com.quizprodigy.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.quizprodigy.common.Validation;
@@ -10,6 +13,7 @@ import com.quizprodigy.entity.Users;
 import com.quizprodigy.repository.StudentRepository;
 import com.quizprodigy.repository.UserRepository;
 
+@Service
 public class StudentService {
     @Autowired
     private UserRepository userRepository;
@@ -18,12 +22,12 @@ public class StudentService {
     private StudentRepository studentRepository;
 
     @Autowired
-	private PasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder;
 
     @Transactional
     public boolean addStudent(Students students) {
 
-        Users findUser = userRepository.findByuserId(students.getStudentId());
+        Users findUser = userRepository.findByUserId(students.getStudentId());
 
         // Check if the user does not already exist
         if (findUser == null) {
@@ -43,22 +47,34 @@ public class StudentService {
                 java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
                 students.setCreatedDate(sqlDate);
                 students.setModifyDate(sqlDate);
-                students.setStatus("pending");
+                students.setStatus("Pending");
 
                 // Create users entity object and save it to the database
                 Users users = new Users();
                 users.setUserId(students.getStudentId());
                 users.setUserName(students.getStudentName());
-                users.setRole("teacher");
+                users.setRole("Student");
                 users.setPassword(students.getPassword());
 
                 // Save both entities in a transaction
                 students = studentRepository.save(students);
                 users = userRepository.save(users);
-
                 return true; // Successfully saved both entities
             }
         }
         return false; // User already exists or validation failed
     }
+
+    // Getting all teaches whose status is "pending"
+    public List<Students> getStudentsByStatus(String status) {
+        return studentRepository.findAllStudentsByStatus(status);
+    }
+
+    // Through this method we can update status
+	@Transactional
+	public void updateStatus(String email, String status) {
+		studentRepository.updateStatusByShopEmail(email, status);
+		return;
+	}
+
 }
