@@ -46,7 +46,7 @@ export class RegistrationService {
       const teacherData = {      
         teacherName: userData.name,
         teacherId: userData.email,
-        teacherDepartment: userData.department,
+        department: userData.department,
         contactNo: userData.contactNumber,
 
         instituteName: userData.instituteName,

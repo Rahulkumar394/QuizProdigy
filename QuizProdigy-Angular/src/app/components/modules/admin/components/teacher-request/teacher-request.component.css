@@ -1,0 +1,31 @@
+table {
+    width: 100% !important;
+    border-collapse: collapse;
+
+}
+
+th {
+    background-color: #4e4e4e;
+}
+
+tr {
+    border: 0.5px solid #69696930;
+}
+tr:nth-child(even) {
+    background:#f2f2f2;
+    color: #2e2e2e;
+}
+
+tr:nth-child(odd) {
+    background:#fff5d3;
+    color: #2e2e2e;
+}
+.body{
+    height: 100vh;
+    background-color: white;
+}
+.message{
+    text-align: center;
+    color:black;
+}
+

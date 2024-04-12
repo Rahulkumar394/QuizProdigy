@@ -7,6 +7,7 @@ import { ManageExamComponent } from './components/manage-exam/manage-exam.compon
 import { ManageResultComponent } from './components/manage-result/manage-result.component';
 import { HomeComponent } from './components/home/home.component';
 import { TeacherInformationComponent } from './components/teacher-information/teacher-information.component';
+import { TeacherRequestComponent } from './components/teacher-request/teacher-request.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,7 @@ const routes: Routes = [
       {path:'manage-exam',component:ManageExamComponent},
       {path:'manage-result',component:ManageResultComponent},
       {path:'teacher-information',component:TeacherInformationComponent},
+      {path:'teacher-request',component:TeacherRequestComponent},
       {path:'home',component:HomeComponent},
       {path:'',component:HomeComponent}
       

@@ -24,6 +24,8 @@ import { ManageResultComponent } from './components/manage-result/manage-result.
 import { HomeComponent } from './components/home/home.component';
 import { TeacherInformationComponent } from './components/teacher-information/teacher-information.component';
 import {MatTableModule} from '@angular/material/table';
+import { TeacherRequestComponent } from './components/teacher-request/teacher-request.component';
+import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 
 
 @NgModule({
@@ -35,7 +37,8 @@ import {MatTableModule} from '@angular/material/table';
     ManageExamComponent,
     ManageResultComponent,
     HomeComponent,
-    TeacherInformationComponent
+    TeacherInformationComponent,
+    TeacherRequestComponent
   ],
   imports: [
     CommonModule,
@@ -51,6 +54,8 @@ import {MatTableModule} from '@angular/material/table';
     MatInputModule,
     MatCardModule,
     MatTableModule,
+    MatPaginator,
+    MatPaginatorModule,
   ]
 })
 export class AdminModule { }

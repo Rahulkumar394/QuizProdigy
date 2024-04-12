@@ -3,6 +3,8 @@ package com.quizprodigy.entity;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,13 +17,11 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 @Builder
 @Entity
 public class Exam {
@@ -39,9 +39,6 @@ public class Exam {
     @Column(name = "total_time",nullable = false)
     private int totalTime;
 
-    @Column(name = "per_question_time")
-    private int perQuestionTime;
-
     @Column(name = "created_date",nullable = false)
     private Date createdDate;
 
@@ -55,10 +52,45 @@ public class Exam {
     private boolean isHandsOn;
 
     @ManyToOne
-    @JoinColumn(name = "teacher_id")
+    @JoinColumn(name = "teacherId")
+    @JsonIgnore // Exclude this field from JSON serialization
     private Teachers teacherId;
 
     @OneToMany(mappedBy = "exam", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore // Exclude this field from JSON serialization
     private List<Question> questions;
+
+//    @Override
+//    public String toString() {
+//        return "Exam{" +
+//                "examId='" + examId + '\'' +
+//                ", subjectName='" + subjectName + '\'' +
+//                ", totalQuestions=" + totalQuestions +
+//                ", totalTime=" + totalTime +
+//                ", createdDate=" + createdDate +
+//                ", modifyDate=" + modifyDate +
+//                ", isDelete=" + isDelete +
+//                ", isHandsOn=" + isHandsOn +
+//                ", teacherId=" +  (teacherId != null ? teacherId.getTeacherId() :null) +// Indicate teacherId is excluded
+//                ", questionsCount=" + (questions != null ? questions.size() : 0) +
+//                '}';
+//    }
+    @Override
+    public String toString() {
+        String teacherIdString = teacherId != null ? teacherId.getTeacherId() : "NA";
+        String questionsCount = questions != null ? String.valueOf(questions.size()) : "0";
+        return "Exam{" +
+                "examId='" + examId + '\'' +
+                ", subjectName='" + subjectName + '\'' +
+                ", totalQuestions=" + totalQuestions +
+                ", totalTime=" + totalTime +
+                ", createdDate=" + createdDate +
+                ", modifyDate=" + modifyDate +
+                ", isDelete=" + isDelete +
+                ", isHandsOn=" + isHandsOn +
+                ", teacherId='" + teacherIdString + '\'' +
+                ", questionsCount=" + questionsCount +
+                '}';
+    }
 
 }

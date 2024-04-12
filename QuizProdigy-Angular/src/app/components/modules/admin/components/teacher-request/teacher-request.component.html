@@ -1,0 +1,56 @@
+<div class="body">
+<div class="mat-elevation-z8" *ngIf="teacherList && teacherList.length">
+    <table mat-table [dataSource]="dataSource">
+  
+      <!-- Position Column -->
+      <ng-container matColumnDef="sno">
+        <th style="background-color: #4e4e4e; color: #fff;" mat-header-cell *matHeaderCellDef> S.No. </th>
+        <td mat-cell *matCellDef="let element"> {{element.sno}} </td>
+      </ng-container>
+  
+      <!-- Name Column -->
+      <ng-container matColumnDef="teacherName">
+        <th style="background-color: #4e4e4e; color: #fff;" mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.teacherName}} </td>
+      </ng-container>
+  
+      <!-- Weight Column -->
+      <ng-container matColumnDef="department">
+        <th style="background-color: #4e4e4e; color: #fff;" mat-header-cell *matHeaderCellDef> Department </th>
+        <td mat-cell *matCellDef="let element"> {{element.department}} </td>
+      </ng-container>
+  
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="contactNo">
+        <th style="background-color: #4e4e4e; color: #fff;" mat-header-cell *matHeaderCellDef> Contact No </th>
+        <td mat-cell *matCellDef="let element"> {{element.contactNo}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="teacherId">
+        <th style="background-color: #4e4e4e; color: #fff;" mat-header-cell *matHeaderCellDef> Email </th>
+        <td mat-cell *matCellDef="let element"> {{element.teacherId}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="approve">
+        <th style="background-color: #4e4e4e; color: #fff;" mat-header-cell *matHeaderCellDef>Approve</th>
+        <td mat-cell *matCellDef="let element"><mat-icon style="color: rgb(10, 140, 27);" (click)="approveTeacher(element.teacherId)">done</mat-icon></td>
+      </ng-container>
+
+      <ng-container matColumnDef="reject">
+        <th style="background-color: #4e4e4e; color: #fff;" mat-header-cell *matHeaderCellDef>Reject</th>
+        <td mat-cell *matCellDef="let element"><mat-icon style="color: rgba(194, 11, 11, 0.901);" (click)="rejectTeacher(element.teacherId)">close</mat-icon></td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                   showFirstLastButtons
+                   aria-label="Select page of periodic elements">
+    </mat-paginator>
+  </div>
+  <div class="message" *ngIf="teacherList.length==0">
+    <h1>There is no any Pending Request Yet !!</h1>
+  </div>
+</div>

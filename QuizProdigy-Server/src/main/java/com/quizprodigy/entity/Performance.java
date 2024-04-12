@@ -12,13 +12,11 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 @Builder
 @Entity
 public class Performance {
@@ -40,7 +38,7 @@ public class Performance {
 	private int correctAnswer;
 
 	@Column(name = "employee_no", unique = true)
-	private String EmployeeNo;
+	private String employeeNo;
 
 	@Column(name = "percentage", nullable = false)
 	private double percentage; // calculated as (correct answer/ total question)*100
@@ -54,12 +52,30 @@ public class Performance {
 	@Column(name = "isdeleted", nullable = false)
 	private boolean isDeleted;
 
-	@ManyToOne
-	@JoinColumn(name = "studentId")
-	private Students student;
+	 @ManyToOne
+	  @JoinColumn(name = "student_id") // Match the column name in your database
+	  private Students student;
 
 	@ManyToOne
 	@JoinColumn(name = "examId")
-	private Exam exam;
-
+	private Exam examId;
+	
+	
+	 @Override
+	    public String toString() {
+	        return "Performance{" +
+	                "performanceId='" + performanceId + '\'' +
+	                ", totalQuestion=" + totalQuestion +
+	                ", attemptedQuestion=" + attemptedQuestion +
+	                ", unattemptedQuestion=" + unattemptedQuestion +
+	                ", correctAnswer=" + correctAnswer +
+	                ", employeeNo='" + employeeNo + '\'' +
+	                ", percentage=" + percentage +
+	                ", createdDate=" + createdDate +
+	                ", modifyDate=" + modifyDate +
+	                ", isDeleted=" + isDeleted +
+	                ", studentId='" + (student != null ? student.getStudentId() : null) + '\'' + // Avoid infinite loop, print only student ID
+	                ", examId='" + (examId != null ? examId.getExamId() : null) + '\'' + // Avoid infinite loop, print only exam ID
+	                '}';
+	    }
 }

@@ -11,6 +11,8 @@ import com.quizprodigy.entity.Question;
 @Repository
 public interface OptionsRepository  extends JpaRepository<Options, String>{
 
-    List<Options> findByQuestion(Question question);
+	List<Options> findByQuestionId(Question questionId);
+//	List<Options> findByQuestionId(String questionId);
+    //List<Options> findByQuestion(String questionId);
 
 }

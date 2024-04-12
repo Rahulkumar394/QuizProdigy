@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SetPaperComponent } from './components/set-paper/set-paper.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { SetExamComponent } from './components/set-exam/set-exam.component';
+
+import { SetquestionComponent } from './components/setquestion/setquestion.component';
+import { UpdateQuestionComponent } from './components/update-question/update-question.component';
 
 const routes: Routes = [
   {
@@ -10,12 +11,12 @@ const routes: Routes = [
     component:DashboardComponent,
     children:[
       {
-        path:"setExam",
-        component:SetExamComponent
+        path:"setQuestion",
+        component:SetquestionComponent
       },
       {
-        path:"setPaper",
-        component:SetPaperComponent
+        path:"updateQuestion",
+        component:UpdateQuestionComponent
       },
     ]
   },

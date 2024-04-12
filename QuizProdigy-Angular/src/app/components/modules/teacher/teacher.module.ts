@@ -16,18 +16,18 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import {MatStepperModule} from '@angular/material/stepper';
-
+import { MatSelectModule } from '@angular/material/select';
 
 import { ReactiveFormsModule } from '@angular/forms';
-import { SetPaperComponent } from './components/set-paper/set-paper.component';
-import { SetExamComponent } from './components/set-exam/set-exam.component';
+import { SetquestionComponent } from './components/setquestion/setquestion.component';
+import { UpdateQuestionComponent } from './components/update-question/update-question.component';
 
 @NgModule({
   declarations: [
     DashboardComponent,
     NavbarComponent,
-    SetPaperComponent,
-    SetExamComponent
+    SetquestionComponent,
+    UpdateQuestionComponent
   ],
   imports: [
     CommonModule,
@@ -44,6 +44,7 @@ import { SetExamComponent } from './components/set-exam/set-exam.component';
     MatInputModule,
     MatCardModule,
     MatStepperModule,
+    MatSelectModule,
     
   ],
 })

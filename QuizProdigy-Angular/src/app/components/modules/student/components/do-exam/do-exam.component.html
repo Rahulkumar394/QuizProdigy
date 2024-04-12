@@ -1,0 +1,125 @@
+<mat-toolbar>
+  <button
+    style="margin-left: 90vw; position: absolute"
+    mat-icon-button
+    (click)="camera.toggle()"
+    id="menuIcon"
+  >
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <span id="menuTitle">QuizProdigy</span>
+  <div class="nav-buttons">
+    <a mat-button routerLink="/admin/home" class="top-menu-item"
+      >Remaining Time : &nbsp;{{remaningTime}}</a
+    >
+  </div>
+</mat-toolbar>
+
+<!-- LEFT SIDE NAVNBAR -->
+
+<mat-sidenav-container>
+  <mat-sidenav
+    #sidenav
+    [fixedInViewport]="true"
+    [fixedTopGap]="70"
+    mode="side"
+    opened=""
+  >
+    <div class="totalQuestion">
+      <div class="questionNo" *ngFor="let number of sno; let i = index">
+        <h4>{{ i + 1 }}</h4>
+      </div>
+    </div>
+    <div class="questionStatus">
+      <div class="status">
+        <div class="qStatus" style="background-color: rgb(77, 77, 77)">
+          <span>0</span>
+        </div>
+        <p>Not Seen</p>
+      </div>
+      <div class="status">
+        <div class="qStatus" style="background-color: red">
+          <span>0</span>
+        </div>
+        <p>Not Seen</p>
+      </div>
+      <div class="status">
+        <div class="qStatus" style="background-color: green">
+          <span>0</span>
+        </div>
+        <p>Not Seen</p>
+      </div>
+      <div class="status">
+        <div class="qStatus" style="background-color: purple">
+          <span>0</span>
+        </div>
+        <p>Not Seen</p>
+      </div>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <!-- <router-outlet> </router-outlet> -->
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+<!-- CENTER DIV FOE QUESTION  DISPLAY -->
+
+<div class="questionContainer">
+  <div class="question">
+    <p>
+      1>What is The Microservices Answer Skip to main content Why Spring Overview
+      Microservices Reactive Event Driven Cloud Web Applications Serverless
+      Batch Learn Overview Quickstart Guides Blog Projects Overview Spring Boot
+      Spring Framework Spring Cloud Spring Cloud Data Flow Spring Data Spring
+      Integration Spring Batch
+    </p>
+  </div>
+  <div class="option">
+    <div class="option-btn">
+      <input type="radio" name="option" id="optionA" />
+      <label for="optionA">Option A</label>
+    </div>
+
+    <div class="option-btn">
+      <input type="radio" name="option" id="optionB" />
+      <label for="optionB">Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium, fugit!</label>
+    </div>
+    
+    <div class="option-btn">
+      <input type="radio" name="option" id="optionC" />
+      <label for="optionC">Option C Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae sequi aspernatur excepturi qui explicabo, ratione illum accusantium at, tenetur debitis voluptatibus molestias est dicta perspiciatis temporibus velit voluptate numquam consequatur.</label>
+    </div>
+
+    <div class="option-btn">
+      <input type="radio" name="option" id="optionD" />
+        <label for="optionD">Lorem  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Temporibus quo asperiores aut natus fugiat officia consequatur adipisci id, eveniet provident!   ipsum dolor sit amet consectetur adipisicing elit. Eveniet illo saepe similique. Libero quam vel quos id autem, reprehenderit quisquam.</label>
+    </div>
+  </div>
+  <div class="btn">
+    <button mat-raised-button>Previous</button>
+    <button mat-raised-button>Next</button>
+  </div>
+</div>
+
+
+<!-- RIGHT SIDE NAV BAR -->
+
+<mat-sidenav-container>
+  <mat-sidenav
+    #camera
+    [fixedInViewport]="true"
+    [fixedTopGap]="70"
+    mode="side"
+    position="end"
+    opened
+    class="camera"
+  >
+    <div class="videoCamera">
+      <video id="video"  autoplay></video>
+    </div>
+    <div class="userName"><h3>Rahul Kumar</h3></div>
+    <button mat-raised-button>Need Help</button>
+    <button mat-raised-button>Submit</button>
+  </mat-sidenav>
+</mat-sidenav-container>

@@ -1,0 +1,247 @@
+.mat-toolbar {
+  height: 70px;
+  background-color: #423ee0;
+}
+
+/* 
+  #menuTitle {
+    margin-right: 60%;
+    margin-left: 10px;
+  } */
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.mat-toolbar {
+  height: 70px;
+}
+
+.side-menu-item {
+  margin: 10px;
+}
+
+.mat-sidenav {
+  width: 300px;
+  background-color: #e4e4e4;
+  /* background-color: #e4e4e4; */
+}
+
+.nav-buttons {
+  position: absolute;
+  margin-left: 60vw;
+}
+
+.nav-buttons a {
+  margin: 5px;
+}
+
+#menuTitle {
+  margin-right: 60%;
+  margin-left: 10px;
+}
+
+.sub-option {
+  margin-left: 20px;
+
+}
+
+/* DO EXAM DESING */
+
+.totalQuestion {
+  width: 90%;
+  height: 300px;
+  /* background-color: antiquewhite; */
+  border: none;
+  /* color: #000; */
+  margin: 10px;
+  padding: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  overflow-y: scroll;
+  overflow-x: none;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.questionStatus {
+  display: flex;
+  flex-wrap: wrap;
+  /* background-color: antiquewhite; */
+  border: none;
+  color: #000;
+  margin: 10px;
+  padding: 5px;
+
+}
+
+.videoCamera {
+  width: 100%;
+  display: flex;
+  height: 100px;
+  border: none;
+  color: #000;
+  margin-bottom: 5px;
+  /* margin-left: 36px; */
+}
+
+.userName {
+  width: 100%;
+  display: flex;
+  height: 25px;
+  background-color: antiquewhite;
+  border: none;
+  color: #000;
+  margin-bottom: 100px;
+  /* margin-left: 36px; */
+}
+
+.needHelp {
+  width: 100%;
+  display: flex;
+  height: 25px;
+  background-color: antiquewhite;
+  border: none;
+  color: #000;
+  margin-bottom: 100px;
+  /* margin-left: 36px; */
+}
+
+.camera {
+  width: 11vw;
+  /* background-color: #423ee0; */
+  overflow-x: hidden;
+  background-color: #ffffff;
+
+  /* background-color: #e4e4e4; */
+}
+
+.questionNo {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  background-color: rgb(77, 77, 77);
+  border-radius: 50%;
+  border: 0.5px solid rgba(105, 100, 100, 0.805);
+  color: #ffffff;
+}
+
+.questionNo h4 {
+  display: flex;
+  margin-top: 7px;
+  align-self: center;
+  justify-content: center;
+}
+
+.qStatus {
+
+  width: 35px;
+  height: 35px;
+  text-align: center;
+  float: left;
+  cursor: pointer;
+  margin: 5px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.videoCamera video {
+  width: 100%; /* Ensure the video fills the container */
+  height: 100%; /* Ensure the video fills the container */
+  object-fit: cover; /* Maintain aspect ratio and cover the container */
+  transform: scaleX(-1); /* Remove any existing transformations, including mirroring */
+}
+
+.status {
+  width: 120px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  /* justify-content: center; */
+  font-size: 16px;
+  height: 50px;
+  margin-top: 20px;
+
+}
+
+.status p {
+  margin-top: 5px;
+}
+
+/*Question  MAIN CONTAINER */
+.questionContainer {
+  position: relative;
+  height: 90%;
+  /* background-color: lightblue; */
+  width: 67vw;
+  margin-left: 300px;
+  color: #000;
+  /* background-color: rgb(144, 113, 113); */
+}
+
+/* QUESTION DIV */
+.question {
+  padding: 25px;
+  /* background-color: #ffffff; */
+  color: #000;
+  margin-top: 20px;
+}
+
+.question p {
+  line-height: 1.2em;
+  font-size: 16px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+
+
+/* OPTION DIV */
+.option {
+  padding: 25px 10px;
+  margin-top: 10px;
+  /* background-color: rgb(144, 113, 113); */
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* flex-wrap: wrap; */
+  font-size: 16px;
+  column-gap: 50px;
+  margin-left: 10px;
+
+}
+.option-btn{
+  width: fit-content;
+  display: flex;
+  align-items: self-start;
+  margin: 10px 20px;
+}
+.option-btn input{
+  margin-right: 14px;
+  font-size: 16px;
+}
+.option-btn label{
+  text-align: left;
+}
+button {
+  margin: 25px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  text-align: center;
+  transition: all .3s ease-in-out;
+  
+}
+
+.btn{
+
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  transform: translate(-50%,-10%);
+}

@@ -1,23 +1,22 @@
 package com.quizprodigy.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 @Builder
 @Entity
 public class Answers {
@@ -30,6 +29,16 @@ public class Answers {
     private String correctAnswer;
 
     @ManyToOne
-    @JoinColumn(name = "question_id")
-    private Question question;
+    @JoinColumn(name = "questionId")
+    @JsonIgnore // Exclude this field from JSON serialization
+    private Question questionId;
+    
+    @Override
+    public String toString() {
+        return "Answers{" +
+                "answerId='" + answerId + '\'' +
+                ", correctAnswer='" + correctAnswer + '\'' + // Assuming a property named answerText
+                ", questionId='" + (questionId!=null ? questionId.getQuestionId():null)+'\''+
+                '}';
+    }
 }

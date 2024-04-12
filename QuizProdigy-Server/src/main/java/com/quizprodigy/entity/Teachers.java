@@ -13,13 +13,11 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 @Builder
 @Entity
 public class Teachers {
@@ -31,8 +29,8 @@ public class Teachers {
 	@Column(name = "teacher_name", nullable = false)
 	private String teacherName;
 
-	@Column(name = "teacher_department", nullable = false)
-	private String teacherDepartment;
+	@Column(name = "department", nullable = false)
+	private String department;
 
 	@Column(name = "contact_no", unique = true, nullable = false)
 	private String contactNo;
@@ -60,5 +58,26 @@ public class Teachers {
 
 	@OneToMany(mappedBy = "teacherId")
 	private List<Exam> exams;
+	
+	 public Teachers(String teacherId) {
+	        this.teacherId = teacherId;
+	    }
+	 @Override
+	    public String toString() {
+	        return "Teachers{" +
+	                "teacherId='" + teacherId + '\'' +
+	                ", teacherName='" + teacherName + '\'' +
+	                ", department='" + department + '\'' +
+	                ", contactNo='" + contactNo + '\'' + // Include full contact number for this example (adjust as needed)
+	                ", instituteName='" + instituteName + '\'' +
+	                ", employeeNo='" + employeeNo + '\'' +
+	                ", status='" + status + '\'' +
+	                ", createdDate=" + createdDate +
+	                ", modifyDate=" + modifyDate +
+	                ", isDeleted=" + isDeleted +
+	                ", password=" + password + // Mask password for security
+	                ", examsCount=" + (exams != null ? exams.size() : 0) +
+	                '}';
+	    }
 
 }

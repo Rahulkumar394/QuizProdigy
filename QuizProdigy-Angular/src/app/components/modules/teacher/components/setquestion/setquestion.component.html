@@ -1,0 +1,236 @@
+<mat-stepper class="step-controller" #stepper>
+  <!-- 1ST STEP  START FROM HERE -->
+
+  <mat-step [stepControl]="setExam" label="Set Your Exam Details">
+    <form [formGroup]="setExam">
+      <div class="exam-container">
+        <!-- <p class="message">Signup now and get full access to our app.</p> -->
+        <h2>Fill Exam Details</h2>
+        <div class="onefield">
+          <div class="exam-label-field">
+            <label>Exam Name</label>
+          </div>
+          <div class="exam-input-fild">
+            <input
+              type="text"
+              placeholder="Enter Exam Name"
+              formControlName="subjectName"
+              required
+            />
+          </div>
+        </div>
+        <div class="onefield">
+          <div class="exam-label-field">
+            <label>Total Questions</label>
+          </div>
+          <div class="exam-input-fild">
+            <input
+              type="number"
+              placeholder="Total No. of Questions"
+              formControlName="totalQuestions"
+              required
+            />
+          </div>
+        </div>
+        <div class="onefield">
+          <div class="exam-label-field">
+            <label>Total Duration</label>
+          </div>
+          <div class="exam-input-fild">
+            <input
+              type="number"
+              placeholder="Exam Duration(in minutes)"
+              formControlName="totalTime"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="handsOn">
+          <label class="handson-label">Hands On Exam</label>
+          <div class="radioOption">
+            <label for="yes">Yes</label>
+            <input
+              type="radio"
+              value="true"
+              name="handsOn"
+              formControlName="handsOn"
+            />
+          </div>
+
+          <div class="radioOption">
+            <label for="no">No</label>
+            <input
+              type="radio"
+              value="false"
+              name="handsOn"
+              checked
+              formControlName="handsOn"
+            />
+          </div>
+        </div>
+        <button mat-raised-button (click)="setExamObject()">Next</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <!-- 1ST STEP DONE 2ND STEP START FROM HERE -->
+
+  <mat-step [stepControl]="setquestion" label="Set Your Questions">
+    <form class="setquestion" [formGroup]="setquestion">
+      <div class="questionContainer">
+        <div class="question">
+          <label>Total Question :</label
+          ><span id="totalQuestions">{{ totalQuestions }}</span>
+          <label>Current Question No. :</label
+          ><span id="totalQuestions">{{ currentQuestionIndex + 1 }}</span>
+          <label>Remaning Question :</label
+          ><span id="eemaningQuestion"> {{ remaningQuestion }} </span>
+          <textarea
+            class="input-question"
+            id="question"
+            name="question"
+            rows="2"
+            cols="104"
+            placeholder="Write your question here..."
+            formControlName="question"
+            required
+            foucus
+          ></textarea>
+        </div>
+
+        <!-- This div for option -->
+        <div class="option">
+          <div class="option-btn">
+            <label for="optionA">A</label>
+            <input
+              type="text"
+              name="option"
+              id="optionA"
+              placeholder="Type here Option A"
+              formControlName="optionA"
+              required
+            />
+          </div>
+
+          <div class="option-btn">
+            <label for="optionB">B</label>
+            <input
+              type="text"
+              name="option"
+              id="optionB"
+              placeholder="Type here Option B"
+              formControlName="optionB"
+              required
+            />
+          </div>
+
+          <div class="option-btn">
+            <label for="optionC">C</label>
+            <input
+              type="text"
+              name="option"
+              id="optionC"
+              placeholder="Type here Option C"
+              formControlName="optionC"
+              required
+            />
+          </div>
+
+          <div class="option-btn">
+            <label for="optionD">D</label>
+            <input
+              type="text"
+              name="option"
+              id="optionD"
+              placeholder="Type here Option D"
+              formControlName="optionD"
+              required
+            />
+          </div>
+
+          <div class="answer">
+            <label for="Answer">Answer</label>
+            <select
+              name="option"
+              id="answerOption"
+              formControlName="answer"
+              required
+            >
+              <option value="">Select Answer</option>
+              <option value="{{ this.setquestion.value.optionA }}">
+                {{ this.setquestion.value.optionA }}
+              </option>
+              <option value="{{ this.setquestion.value.optionB }}">
+                {{ this.setquestion.value.optionB }}
+              </option>
+              <option value="{{ this.setquestion.value.optionC }}">
+                {{ this.setquestion.value.optionC }}
+              </option>
+              <option value="{{ this.setquestion.value.optionD }}">
+                {{ this.setquestion.value.optionD }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <!-- End div for option -->
+
+        <div class="btn">
+          <button mat-raised-button (click)="showPreviousQuestion()">
+            Previous
+          </button>
+          <button mat-raised-button (click)="addQuestion()">Next</button>
+        </div>
+      </div>
+    </form>
+  </mat-step>
+
+  <!-- 2ND STEP DONE 3RD STEP START FROM HERE -->
+
+  <mat-step [stepControl]="showPreview" class="preview">
+    <button
+      style="position: absolute; left: 80vw"
+      mat-raised-button
+      routerLink="/teacher"
+    >
+      Go to Dashboard
+    </button>
+    <ng-template matStepLabel>Preview Exam</ng-template>
+    <div class="preview-container">
+      <!-- Display Exam Details -->
+      <div class="exam-details">
+        <h2>Exam Details</h2>
+        <p><strong>Exam Name:</strong> {{ setExam.value.subjectName }}</p>
+        <p>
+          <strong>Total Questions:</strong> {{ setExam.value.totalQuestions }}
+        </p>
+        <p>
+          <strong>Total Duration:</strong> {{ setExam.value.totalTime }} minutes
+        </p>
+        <p>
+          <strong>Hands On Exam:</strong>
+          {{ setExam.value.handsOn ? "Yes" : "No" }}
+        </p>
+      </div>
+      <hr />
+      <!-- Display Questions -->
+      <div class="questions-preview">
+        <h2>Questions Preview</h2>
+        <div *ngFor="let question of questionList; let i = index">
+          <p>
+            <strong>Question-{{ i + 1 }}:&nbsp;</strong> {{ question.question }}
+          </p>
+
+          <ul>
+            <li *ngFor="let option of question.options">
+              <strong>{{ option }}</strong>
+            </li>
+          </ul>
+          <p><strong>Answer:</strong> {{ question.answer }}</p>
+        </div>
+      </div>
+    </div>
+  </mat-step>
+
+  <!-- 3RDD STEP END FROM HERE -->
+</mat-stepper>
