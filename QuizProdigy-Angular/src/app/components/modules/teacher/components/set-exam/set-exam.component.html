@@ -1,137 +1,135 @@
-<div class="container">
-  <mat-stepper #stepper>
-    <mat-step [stepControl]="examDetailsForm" errorMessage="Name is required.">
-      <form [formGroup]="examDetailsForm" (ngSubmit)="stepper.next()">
-        <p class="title">Fill Exam Details</p>
-        <!-- <p class="message">Signup now and get full access to our app.</p> -->
-        <div class="flex">
-          <label>
-            <input
-              class="input"
-              type="text"
-              placeholder=""
-              required
-              formControlName="examName"
-            />
-            <span>Exam Name</span>
-          </label>
-
-          <label>
+<div class="main-container">
+  <mat-stepper #stepper class="stepper">
+    <mat-step  [stepControl]="examDetailsForm" errorMessage="Name is required.">
+      <div class="step">
+        <form [formGroup]="examDetailsForm" (ngSubmit) ="stepper.next()" class="exam-details">
+          <p class="title">Fill Exam Details</p>
+          <!-- <p class="message">Signup now and get full access to our app.</p> -->
+            <label class="input-label">
+              <span>Exam Name</span>
+              <input
+                class="input field"
+                type="text"
+                placeholder="Exam Name"
+                required
+                formControlName="examName"
+              />
+            </label>
+  
+            <label class="input-label">
+              <span>Number of Questions</span>
+              <input
+                class="input"
+                type="number"
+                placeholder="Number of Questions"
+                required
+                formControlName="totalQuestions"
+              />
+            </label>
+  
+          <label class="input-label">
+            <span>Duration | in minutes</span>
             <input
               class="input"
               type="number"
-              placeholder=""
+              placeholder="Durations"
               required
-              formControlName="totalQuestions"
+              formControlName="examDuration"
             />
-            <span>Number of Questions</span>
           </label>
-        </div>
-
-        <label>
-          <input
-            class="input"
-            type="number"
-            placeholder=""
-            required
-            formControlName="examDuration"
-          />
-          <span>Duration | in minutes</span>
-        </label>
-
-        <label>
-          <input
-            class="input"
-            type="text"
-            placeholder=""
-            required
-            formControlName="timeAllotedPerQuestion"
-          />
-          <span>Time Alloted per Question</span>
-        </label>
-
-        <!-- Hands On Options -->
-
-        <div class="handsOn">
-          <span>Hands On Exam</span>
-          <div class="radioOption">
-            <label for="yes">Yes</label>
+  
+          <label class="input-label">
+            <span>Time Alloted per Question</span>
             <input
-              type="radio"
-              value="true"
-              name="handsOn"
-              formControlName="handsOn"
+              class="input"
+              type="text"
+              placeholder="Time Alloted"
+              required
+              formControlName="timeAllotedPerQuestion"
             />
+          </label>
+  
+          <!-- Hands On Options -->
+  
+          <div class="handsOn">
+            <span>Hands On Exam</span>
+            <div class="radioOption">
+              <label for="yes">Yes</label>
+              <input
+                type="radio"
+                value="true"
+                name="handsOn"
+                formControlName="handsOn"
+              />
+            </div>
+  
+            <div class="radioOption">
+              <label for="no">No</label>
+              <input
+                type="radio"
+                value="false"
+                name="handsOn"
+                checked
+                formControlName="handsOn"
+              />
+            </div>
           </div>
+  
+          <!-- Hands On Options End Here -->
+  
+          <button class="submit" (click)="generateFields()">Next >>></button>
+        </form>
 
-          <div class="radioOption">
-            <label for="no">No</label>
-            <input
-              type="radio"
-              value="false"
-              name="handsOn"
-              checked
-              formControlName="handsOn"
-            />
-          </div>
-        </div>
-
-        <!-- Hands On Options End Here -->
-
-        <button class="submit">Next >>></button>
-      </form>
+      </div>
     </mat-step>
     <!-- ******************************* Exam Details Complete Here *************************************** -->
-    <mat-step [stepControl]="questionDetailsForm" errorMessage="Questions are required.">
-      <form [formGroup]="questionDetailsForm">
-        <div *ngFor="let questionGroup of questions; let qIndex = index">
-          
-          <div class="input-container">
-          
-            <input style="color: aliceblue" type="text" formControlName="question" required/>
-            <label [for]="'question' + qIndex" class="label">Enter Question </label>
-            <div class="underline"></div>
-          
+    <mat-step
+      [stepControl]="questionDetailsForm"
+      errorMessage="Questions are required."
+    >
+      <!-- <p>set-question-paper works!</p> -->
+      <div class="step">
+        <form id="quiz-form" [formGroup]="questionDetailsForm" class="exam-details">
+          <div id="questions"></div>
+          <div class="controls">
+            <button
+              type="button"
+              class="next-btn disable"
+              (click)="nextQuestion()"
+            >
+              Next Question
+            </button>
+  
+            <button
+              type="button"
+              class="prev-btn disable"
+              (click)="previousQuestion()"
+            >
+              Previous
+            </button>
+  
+            <button
+              type="button"
+              class="submit disable"
+              (click)="submitQuestions()"
+            >
+              Submit Questions
+            </button>
           </div>
+          <button mat-raised-button (click)="stepper.previous()">Previous</button>
+          <button mat-raised-button (click)="stepper.next()">Next</button>
+        </form>
+      </div>
 
-          <div class="answer-container">
-            <div class="input-container">
-              <input style="color: aliceblue" type="text" required />
-              <label class="label">Option 1</label>
-              <div class="underline"></div>
-
-              <input style="color: aliceblue" type="text" required />
-              <label class="label">Option 2</label>
-              <div class="underline"></div>
-
-              <input style="color: aliceblue" type="text" required />
-              <label class="label">Option 3</label>
-              <div class="underline"></div>
-
-              <input style="color: aliceblue" type="text" required />
-              <label class="label">Option 4</label>
-              <div class="underline"></div>
-            </div>
-            <!-- Add input field for answer -->
-            <input style="color: aliceblue" type="text" required />
-            <label class="label">Enter Answer</label>
-            <div class="underline"></div>
-          </div>
-        </div>
-        <button mat-raised-button (click)="addQuestion()">Add Question</button>
-        <button mat-raised-button type="submit">Submit</button>
-      </form>
-      <button mat-raised-button (click)="stepper.previous()">Previous</button>
-      <button mat-raised-button (click)="stepper.next()">Next</button>
     </mat-step>
 
-    <mat-step>
+    <!-- <mat-step>
       <ng-template matStepLabel>Done</ng-template>
       <p>You are now done.</p>
       <div>
         <button mat-button matStepperPrevious>Back</button>
         <button mat-button (click)="stepper.reset()">Reset</button>
       </div>
-    </mat-step>
+    </mat-step> -->
   </mat-stepper>
 </div>

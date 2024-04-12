@@ -2,13 +2,28 @@
 <div class="container">
   <form id="quiz-form">
     <label id="label" for="question-count">Number of Questions:</label>
-    <input class="number-input" type="number" id="question-count" min="1" required>
-    <button class="submit-btn" type="button" (click)="generateFields()">Submit</button>
-</form>
-<button type="button" class="next-btn disable" (click)="nextQuestion()">Next</button>
-<button type="button"  class="prev-btn disable" (click)="previousQuestion()">Previous</button>
-<button type="button" class="submit disable" (click)="submitQuestions()">Submit Qestions</button>
+    <input
+      class="number-input"
+      type="number"
+      id="question-count"
+      min="1"
+      required
+    />
+    <button class="submit-btn" type="button" (click)="generateFields()">
+      Submit
+    </button>
+  </form>
+  <button type="button" class="next-btn disable" (click)="nextQuestion()">
+    Next
+  </button>
 
-<div id="questions"></div>
+    <button type="button" class="prev-btn disable" (click)="previousQuestion()">
+      Previous
+    </button>
+    
+      <button type="button" class="submit disable" (click)="submitQuestions()">
+        Submit Questions
+      </button>
+
+  <div id="questions"></div>
 </div>
-  
