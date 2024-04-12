@@ -11,6 +11,7 @@ import com.quizprodigy.entity.Question;
 @Repository
 public interface AnswersRepository  extends JpaRepository<Answers, String>{
 
-    List<Answers> findByQuestion(Question question);
+   // List<Answers> findByQuestion(Question question);
+	List<Answers> findByQuestionId(Question questionId);
 
 }

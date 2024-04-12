@@ -14,13 +14,11 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 @Builder
 @Entity
 public class Students {
@@ -38,6 +36,9 @@ public class Students {
 	
     @Column(name = "institute_name")
 	private String instituteName;
+
+	@Column(name = "department", nullable = false)
+	private String department;
 
 	@Column(name = "enrollment",unique =  true)
 	private String enrollment;
@@ -60,5 +61,21 @@ public class Students {
     @OneToMany(mappedBy = "student")
     private List<Performance> performances;
 
-
+    @Override
+    public String toString() {
+        return "Students{" +
+                "studentId='" + studentId + '\'' +
+                ", studentName='" + studentName + '\'' +
+                ", contactNo='" + contactNo + '\'' +
+                ", instituteName='" + instituteName + '\'' +
+                ", department='" + department + '\'' +
+                ", enrollment='" + enrollment + '\'' +
+                ", status='" + status + '\'' +
+                ", createdDate=" + createdDate +
+                ", modifyDate=" + modifyDate +
+                ", isDeleted=" + isDeleted +
+                ", password=" + password +// Mask password for security
+                ", performancesCount=" + (performances != null ? performances.size() : 0) +
+                '}';
+    }
 }

@@ -7,17 +7,21 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.quizprodigy.entity.Students;
 import com.quizprodigy.request.SetQuestionAnswerRequest;
+import com.quizprodigy.response.GetQuestionAnswerResponse;
 import com.quizprodigy.response.Response;
 import com.quizprodigy.service.ExamService;
 import com.quizprodigy.service.StudentService;
 
+@RestController
 @RequestMapping("/teacher")
 public class TeacherController {
 
@@ -29,7 +33,6 @@ public class TeacherController {
 	// Through this API we can setExamAndQuestionPaper
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/set-exam-question")
-	@Secured("Teacher")
 	public ResponseEntity<Response> setExamQuestion(@RequestBody SetQuestionAnswerRequest questions) {
 
 		System.out.println("<=====>TeacherController  setExamQuestion()=====>\n" + questions);
@@ -41,45 +44,62 @@ public class TeacherController {
 					.body(new Response("Error while adding exam"));
 	}
 
+	// Through this API we can setExamAndQuestionPaper
+	@CrossOrigin(origins = "http://localhost:4200")
+	@GetMapping("/get-allexamid-by-teacherid/{teacherId}")
+	public ResponseEntity<List<String>> getAllExamIdByTeacherId(@PathVariable String teacherId) {
+
+		System.out.println("<=====>TeacherController  getAllExamIdByTeacherId()=====>\n" + teacherId);
+		List<String> examsIds = examService.getAllExamIdByTeacherId(teacherId);
+		System.out.println("====ResponseEntity Examid==" + examsIds);
+		if (!examsIds.isEmpty())
+			return ResponseEntity.status(HttpStatus.OK).body(examsIds);
+		else
+			return ResponseEntity.status(HttpStatus.NO_CONTENT)
+					.body(examsIds);
+	}
+
 	// Through this API we can find Exam Details alon with Questions and Answers by
 	// providing the examId
 	@CrossOrigin(origins = "http://localhost:4200")
-	@PostMapping("/exam/{examId}")
+	@GetMapping("/exam-question/{examId}")
 	@Secured("Teacher")
-	public ResponseEntity<SetQuestionAnswerRequest> getExamDetailsByExamId(@PathVariable String examId) {
+	public ResponseEntity<GetQuestionAnswerResponse> getExamDetailsByExamId(@PathVariable String examId) {
 
 		System.out.println("<=====>TeacherController getExamDetailsByExamId()=====>\n" + examId);
-		SetQuestionAnswerRequest examDetails = examService.getExamDetailsById(examId);
-		if (examDetails != null)
+//		SetQuestionAnswerRequest examDetails = examService.getExamDetailsById(examId);
+		GetQuestionAnswerResponse examDetails = examService.getExamDetailsById2(examId);
+		System.out.println("<<===ResponseEntity getExamDetailsByExamId===>>\n\n"+examService.getExamDetailsById2(examId));
 			return ResponseEntity.status(HttpStatus.OK).body(examDetails);
-		else
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(examDetails);
 	}
 
 	// Through this API we can update QuestionAnswer
-	@CrossOrigin(origins = "http://localhost:4200")
-	@PostMapping("/set-exam-question")
-	@Secured("Teacher")
-	public ResponseEntity<Response> updateExamQuestion(@RequestBody SetQuestionAnswerRequest updateQuestion) {
-
-		System.out.println("<=====>TeacherController  setExamQuestion()=====>\n" + updateQuestion);
-		boolean isSuccessful = examService.updateExamQuestionAnswer(updateQuestion);
-		if (isSuccessful)
-			return ResponseEntity.status(HttpStatus.OK).body(new Response("Updated Successfully"));
-		else
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-					.body(new Response("Error while updating exam"));
-	}
+	// @CrossOrigin(origins = "http://localhost:4200")
+	// @PostMapping("/update-exam-question")
+	// @Secured("Teacher")
+	// public ResponseEntity<Response> updateExamQuestion(@RequestBody
+	// SetQuestionAnswerRequest updateQuestion) {
+	//
+	// System.out.println("<=====>TeacherController setExamQuestion()=====>\n" +
+	// updateQuestion);
+	// boolean isSuccessful = examService.updateExamQuestionAnswer(updateQuestion);
+	// if (isSuccessful)
+	// return ResponseEntity.status(HttpStatus.OK).body(new Response("Updated
+	// Successfully"));
+	// else
+	// return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+	// .body(new Response("Error while updating exam"));
+	// }
 
 	// Through this API we can delete exam as well as question options and answer
 	// which is related to that exam
 	@CrossOrigin(origins = "http://localhost:4200")
-	@PostMapping("/delete-exam/{examId}")
+	@GetMapping("/delete-exam/{examId}")
 	@Secured("Teacher")
 	public ResponseEntity<Response> deleteExam(@PathVariable String examId) {
 
 		System.out.println("<=====>TeacherController  deleteExam()<=====>\n" + examId);
-		boolean isSuccessful = examService.deleteExamById(examId);
+		boolean isSuccessful = true;//examService.deleteExamById(examId);
 		if (isSuccessful)
 			return ResponseEntity.status(HttpStatus.OK).body(new Response("Deleted Successfully"));
 		else

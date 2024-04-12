@@ -1,0 +1,27 @@
+
+<h2 mat-dialog-title>Install Angular</h2>
+<mat-dialog-content class="mat-typography">
+    <h1>Exam Instructions</h1>
+    <h2>Instructions:</h2>
+    <ol>
+        <li>Read each question carefully before answering.</li>
+        <li>This exam consists of multiple-choice questions.</li>
+        <li>Each question has only one correct answer.</li>
+        <li>Do not spend too much time on any single question. If you are unsure, mark the best answer and move on.</li>
+        <li>Review your answers before submitting the exam.</li>
+        <li>You will have <strong>30 min</strong> to complete the exam.</li>
+    </ol>
+    <h2>Exam Rules:</h2>
+    <ul>
+        <li>No talking or communication with other students during the exam.</li>
+        <li>Do not use any unauthorized materials or devices during the exam.</li>
+        <li>Follow the instructions provided by the invigilator or proctor.</li>
+        <li>If you have any technical issues, raise your hand to get assistance.</li>
+        <li>Submit your answers before the time limit expires.</li>
+    </ul>
+    <p>Good luck with your exam!</p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Agree</button>
+</mat-dialog-actions>

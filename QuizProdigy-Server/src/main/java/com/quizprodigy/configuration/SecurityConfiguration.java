@@ -39,6 +39,8 @@ public class SecurityConfiguration {
 				.authorizeHttpRequests(requests -> requests.requestMatchers("/login").permitAll()
 						.requestMatchers("/register-student").permitAll()
 						.requestMatchers("/register-teacher").permitAll()
+						.requestMatchers("/admin/**").permitAll()
+						.requestMatchers("/teacher/**").permitAll()
 						.anyRequest().authenticated())
 				.exceptionHandling(ex -> ex.authenticationEntryPoint(point))
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
@@ -53,5 +55,6 @@ public class SecurityConfiguration {
 		Provider.setPasswordEncoder(passwordEncoder);
 		return Provider;
 	}
+	
 }
 

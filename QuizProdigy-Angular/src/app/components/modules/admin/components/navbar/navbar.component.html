@@ -21,21 +21,14 @@
     <div>
       <!-- routerLink="/admin/manage-student" -->
       <a mat-button (click)="selectStudent()" class="side-menu-item"
+      routerLink="/admin/manage-student"
         >Manage Student</a
       >
-    </div>
-    <div *ngIf="toggleStudent" class="sub-option">
-      <div>
-        <a mat-button routerLink="/admin/manage-student" class="side-menu-item"
-          >Student Information</a
-        >
-      </div>
-    </div>
+    </div>   
 
     <div>
       <a
         mat-button
-        routerLink="/admin/manage-teacher"
         class="side-menu-item"
         (click)="selectTeacher()"
         >Manage Teacher</a
@@ -43,13 +36,13 @@
     </div>
     <div *ngIf="toggleTeacher" class="sub-option">
       <div>
-        <a mat-button routerLink="/admin/manage-teacher" class="side-menu-item"
+        <a mat-button routerLink="/admin/teacher-information" class="side-menu-item"
           >Teacher Information</a
         >
       </div>
       <div>
-        <a mat-button routerLink="/admin/manage-teacher" class="side-menu-item"
-          >Reuest Teacher</a
+        <a mat-button routerLink="/admin/teacher-request" class="side-menu-item" 
+          >Request Teacher</a
         >
       </div>
     </div>

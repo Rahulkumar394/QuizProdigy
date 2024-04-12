@@ -5,8 +5,8 @@
   
     <span id="menuTitle">QuizProdigy</span>
     <div class="nav-buttons">
-      <a mat-button routerLink="/teacher" class="top-menu-item">Homesdf</a>
-      <a mat-button routerLink="/teacher/setPaper" class="top-menu-item"
+      <a mat-button routerLink="/teacher" class="top-menu-item">Homes</a>
+      <a mat-button routerLink="/teacher/setQuestion" class="top-menu-item"
         >Set Question Paper</a
       >
       <a mat-button routerLink="/teacher" class="top-menu-item">About</a>
@@ -32,9 +32,9 @@
         <a
           (click)="sidenav.close()"
           mat-button
-          routerLink="/admin/services"
+          routerLink="/teacher/updateQuestion"
           class="side-menu-item"
-          ><mat-icon>settings</mat-icon>Services</a
+          ><mat-icon>settings</mat-icon>Update Exam</a
         >
       </div>
   
@@ -59,7 +59,7 @@
       </div>
     </mat-sidenav>
     <mat-sidenav-content>
-      <router-outlet> </router-outlet>
+      <router-outlet></router-outlet>
     </mat-sidenav-content>
   </mat-sidenav-container>
   
