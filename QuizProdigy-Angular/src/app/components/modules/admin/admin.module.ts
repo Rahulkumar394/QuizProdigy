@@ -26,6 +26,7 @@ import { TeacherInformationComponent } from './components/teacher-information/te
 import {MatTableModule} from '@angular/material/table';
 import { TeacherRequestComponent } from './components/teacher-request/teacher-request.component';
 import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
+import { TempComponent } from './components/temp/temp.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
     ManageResultComponent,
     HomeComponent,
     TeacherInformationComponent,
-    TeacherRequestComponent
+    TeacherRequestComponent,
+    TempComponent
   ],
   imports: [
     CommonModule,

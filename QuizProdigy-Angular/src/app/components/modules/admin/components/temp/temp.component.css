@@ -1,0 +1,16 @@
+.nav-container{
+    background-color: rgb(77, 77, 231);
+    height: 8vh;
+    display: flex;
+    align-items: center;
+}
+.logo{
+    align-items: center;
+}
+.nav-container .logo img{
+    height: 8vh;
+    border-radius: 50%;
+    background-clip: content-box;
+    position: relative;
+    /* width: 8vw; */
+}   
