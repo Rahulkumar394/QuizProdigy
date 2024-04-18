@@ -1,0 +1,75 @@
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource">
+    <!-- Position Column -->
+    <ng-container matColumnDef="sno">
+      <th mat-header-cell *matHeaderCellDef>No.</th>
+      <td mat-cell *matCellDef="let element">{{ element.sno }}</td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="examId">
+      <th mat-header-cell *matHeaderCellDef>ExamId</th>
+      <td mat-cell *matCellDef="let element">{{ element.examId }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="examName">
+      <th mat-header-cell *matHeaderCellDef>Exam Name</th>
+      <td mat-cell *matCellDef="let element">{{ element.examName }}</td>
+    </ng-container>
+
+    <!-- <ng-container matColumnDef="totalQuestion">
+        <th mat-header-cell *matHeaderCellDef> Total Question </th>
+        <td mat-cell *matCellDef="let element"> {{element.totalQuestion}} </td>
+      </ng-container> -->
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="teacherName">
+      <th mat-header-cell *matHeaderCellDef>Teacher Name</th>
+      <td mat-cell *matCellDef="let element">{{ element.teacherName }}</td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="schedule">
+      <th mat-header-cell *matHeaderCellDef>Schedule</th>
+      <td mat-cell *matCellDef="let element"> <mat-icon   (click)="scheduleExam(element.examId)">schedule</mat-icon></td>      
+    </ng-container>
+
+    <!-- <ng-container matColumnDef="time">
+      <th mat-header-cell *matHeaderCellDef>Time</th>
+      <td mat-cell *matCellDef="let element"> <mat-icon   (click)="scheduleExam(element.examId)"></mat-icon></td>      
+      <td mat-cell *matCellDef="let element">
+        <input type="time" name="" id="" />
+      </td>
+    </ng-container> -->
+
+      <!-- <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef>Date</th>
+        <td mat-cell *matCellDef="let element">
+          <input type="date" [min]="minDate" />
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="time">
+        <th mat-header-cell *matHeaderCellDef>Time</th>
+        <td mat-cell *matCellDef="let element">
+        
+          <input type="time" [min]="minTime" />
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="setDateTime">
+        <th mat-header-cell *matHeaderCellDef>Set Schedule</th>
+        <td mat-cell *matCellDef="let element"><mat-icon>schedule</mat-icon></td>
+      </ng-container> -->
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 20]"
+    showFirstLastButtons
+    aria-label="Select page of periodic elements"
+  >
+  </mat-paginator>
+</div>

@@ -36,7 +36,7 @@
             <label>Total Questions</label>
           </div>
           <div class="exam-input-fild">
-            <input type="number" placeholder="Total No. of Questions" formControlName="totalQuestions" />
+            <input type="number" placeholder="Total No. of Questions" formControlName="totalQuestions" readonly />
           </div>
         </div>
         <div class="onefield">
@@ -163,11 +163,10 @@
         <!-- End div for option --> 
 
         <div class="btn">
-          <button mat-raised-button (click)="showPreviousQuestion()">
-            Previous
-          </button>
           <button mat-raised-button (click)="nextQuestion()">Next</button>
-          <button *ngIf="totalQuestions==currentQuestionIndex+1" mat-raised-button (click)="updateQuestion()">Update</button>
+          <!-- <button *ngIf="totalQuestions==currentQuestionIndex+1" mat-raised-button (click)="updateQuestion()">Update</button> -->
+          <button  mat-raised-button (click)="updateQuestion()">Update</button>
+          <button mat-raised-button (click)="done()">Done </button>
         </div>
       </div>
     </form>

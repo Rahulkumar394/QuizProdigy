@@ -20,63 +20,80 @@
   >
     <div>
       <!-- routerLink="/admin/manage-student" -->
-      <a mat-button (click)="selectStudent()" class="side-menu-item"
-      routerLink="/admin/manage-student"
-        >Manage Student</a
-      >
-    </div>   
-
-    <div>
       <a
         mat-button
+        (click)="selectStudent()"
         class="side-menu-item"
-        (click)="selectTeacher()"
+        routerLink="/admin/manage-student"
+        >Manage Student</a
+      >
+    </div>
+
+    <div>
+      <a mat-button class="side-menu-item" (click)="selectTeacher()"
         >Manage Teacher</a
       >
     </div>
     <div *ngIf="toggleTeacher" class="sub-option">
       <div>
-        <a mat-button routerLink="/admin/teacher-information" class="side-menu-item"
+        <a
+          mat-button
+          routerLink="/admin/teacher-information"
+          class="side-menu-item"
           >Teacher Information</a
         >
       </div>
       <div>
-        <a mat-button routerLink="/admin/teacher-request" class="side-menu-item" 
+        <a mat-button routerLink="/admin/teacher-request" class="side-menu-item"
           >Request Teacher</a
         >
       </div>
     </div>
     <div>
-      <a mat-button routerLink="/admin/manage-exam" class="side-menu-item" (click)="selectExam()"
+      <a
+        mat-button
+        routerLink="/admin/manage-exam"
+        class="side-menu-item"
+        (click)="selectExam()"
         >Manage Exam</a
       >
     </div>
     <div *ngIf="toggleExam" class="sub-option">
       <div>
-        <a mat-button routerLink="" class="side-menu-item">All Exam Details</a>
+        <a mat-button routerLink="/admin/setExamDate" class="side-menu-item">Set Exam Date</a>
+      </div>
+    </div>
+    <div *ngIf="toggleExam" class="sub-option">
+      <div>
+        <a mat-button routerLink="" class="side-menu-item">View Schedule Exam</a>
       </div>
     </div>
     <div>
-      <a mat-button routerLink="/admin/manage-result" class="side-menu-item" (click)="selectResult()"
+      <a
+        mat-button
+        routerLink="/admin/manage-result"
+        class="side-menu-item"
+        (click)="selectResult()"
         >Manage Result</a
       >
     </div>
     <div *ngIf="toggleResult" class="sub-option">
       <div>
-        <a mat-button routerLink="" class="side-menu-item">Set Result Cutoff </a>
+        <a mat-button routerLink="" class="side-menu-item"
+          >Set Result Cutoff
+        </a>
       </div>
       <div>
         <a mat-button routerLink="" class="side-menu-item">Pass students </a>
       </div>
       <div>
-        <a mat-button routerLink="" class="side-menu-item">Result Send  to Student </a>
+        <a mat-button routerLink="" class="side-menu-item"
+          >Result Send to Student
+        </a>
       </div>
-    
     </div>
     <div>
-      <a mat-button routerLink="/admin/chat" class="side-menu-item"
-        >Chat Room</a
-      >
+      <a mat-button routerLink="/admin/chat" class="side-menu-item">Chat Room</a>
     </div>
   </mat-sidenav>
   <mat-sidenav-content>

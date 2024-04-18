@@ -37,7 +37,7 @@ public class Students {
     @Column(name = "institute_name")
 	private String instituteName;
 
-	@Column(name = "department", nullable = false)
+	@Column(name = "department")
 	private String department;
 
 	@Column(name = "enrollment",unique =  true)

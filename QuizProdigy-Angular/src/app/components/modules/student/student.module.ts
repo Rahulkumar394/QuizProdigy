@@ -16,12 +16,15 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { DoExamComponent } from './components/do-exam/do-exam.component';
 import { ExamInstructionsComponent } from './components/exam-instructions/exam-instructions.component';
+import { FormsModule } from '@angular/forms';
+import { GetexamcodeComponent } from './components/getexamcode/getexamcode.component';
 
 @NgModule({
   declarations: [
     DoExamComponent,
     DashboardComponent,
     ExamInstructionsComponent,
+    GetexamcodeComponent,
 
   ],
   imports: [
@@ -32,6 +35,7 @@ import { ExamInstructionsComponent } from './components/exam-instructions/exam-i
     MatToolbarModule,
     MatIconModule,
     MatSidenavModule,
+    FormsModule,
   ],
 })
 export class StudentModule {}

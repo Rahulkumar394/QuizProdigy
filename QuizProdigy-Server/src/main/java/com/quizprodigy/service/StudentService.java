@@ -1,5 +1,6 @@
 package com.quizprodigy.service;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,21 +9,26 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.quizprodigy.common.Validation;
+import com.quizprodigy.dto.ExamQuestionDto;
 import com.quizprodigy.entity.Students;
 import com.quizprodigy.entity.Users;
+import com.quizprodigy.repository.ExamRepository;
 import com.quizprodigy.repository.StudentRepository;
 import com.quizprodigy.repository.UserRepository;
+import com.quizprodigy.response.GetQuestionAnswerResponse;
 
 @Service
 public class StudentService {
     @Autowired
     private UserRepository userRepository;
-
     @Autowired
     private StudentRepository studentRepository;
-
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private ExamRepository examRepository;
+    @Autowired
+    private ExamService examService;
 
     @Transactional
     public boolean addStudent(Students students) {
@@ -71,10 +77,17 @@ public class StudentService {
     }
 
     // Through this method we can update status
-	@Transactional
-	public void updateStatus(String email, String status) {
-		studentRepository.updateStatusByShopEmail(email, status);
-		return;
-	}
+    @Transactional
+    public void updateStatus(String email, String status) {
+        studentRepository.updateStatusByShopEmail(email, status);
+        return;
+    }
+
+    // Getting question for taking exam
+    public GetQuestionAnswerResponse takeExamById(String examId) {
+        GetQuestionAnswerResponse question = examService.getExamDetailsById(examId);
+        Collections.shuffle(question.getQuestions());
+        return question;
+    }
 
 }

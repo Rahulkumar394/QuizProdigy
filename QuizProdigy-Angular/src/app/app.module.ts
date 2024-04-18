@@ -17,7 +17,7 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
     AppComponent,
     LoginComponent,
     RegistrationComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
   ],
   imports: [
     BrowserModule,

@@ -29,7 +29,7 @@ public class Options {
     private String optionValue;
 
     @ManyToOne
-    @JoinColumn(name = "questionId")
+    @JoinColumn(name = "question_Id")
     @JsonIgnore // Exclude this field from JSON serialization
     private Question questionId;
     

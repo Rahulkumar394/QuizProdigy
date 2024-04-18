@@ -67,29 +67,24 @@ public class TeacherController {
 	public ResponseEntity<GetQuestionAnswerResponse> getExamDetailsByExamId(@PathVariable String examId) {
 
 		System.out.println("<=====>TeacherController getExamDetailsByExamId()=====>\n" + examId);
-//		SetQuestionAnswerRequest examDetails = examService.getExamDetailsById(examId);
-		GetQuestionAnswerResponse examDetails = examService.getExamDetailsById2(examId);
-		System.out.println("<<===ResponseEntity getExamDetailsByExamId===>>\n\n"+examService.getExamDetailsById2(examId));
-			return ResponseEntity.status(HttpStatus.OK).body(examDetails);
+		GetQuestionAnswerResponse examDetails = examService.getExamDetailsById(examId);
+		return ResponseEntity.status(HttpStatus.OK).body(examDetails);
 	}
 
 	// Through this API we can update QuestionAnswer
-	// @CrossOrigin(origins = "http://localhost:4200")
-	// @PostMapping("/update-exam-question")
-	// @Secured("Teacher")
-	// public ResponseEntity<Response> updateExamQuestion(@RequestBody
-	// SetQuestionAnswerRequest updateQuestion) {
-	//
-	// System.out.println("<=====>TeacherController setExamQuestion()=====>\n" +
-	// updateQuestion);
-	// boolean isSuccessful = examService.updateExamQuestionAnswer(updateQuestion);
-	// if (isSuccessful)
-	// return ResponseEntity.status(HttpStatus.OK).body(new Response("Updated
-	// Successfully"));
-	// else
-	// return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-	// .body(new Response("Error while updating exam"));
-	// }
+	@CrossOrigin(origins = "http://localhost:4200")
+	@PostMapping("/update-exam-question")
+	@Secured("Teacher")
+	public ResponseEntity<Response> updateExamQuestion(@RequestBody GetQuestionAnswerResponse updateQuestion) {
+
+		System.out.println("<=====>TeacherController updateExamQuestion()=====>\n" + updateQuestion);
+		boolean isSuccessful = examService.updateExamQuestionAnswer(updateQuestion);
+		if (isSuccessful)
+			return ResponseEntity.status(HttpStatus.OK).body(new Response("Updated Successfully"));
+		else
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body(new Response("Error while updating exam"));
+	}
 
 	// Through this API we can delete exam as well as question options and answer
 	// which is related to that exam
@@ -98,8 +93,8 @@ public class TeacherController {
 	@Secured("Teacher")
 	public ResponseEntity<Response> deleteExam(@PathVariable String examId) {
 
-		System.out.println("<=====>TeacherController  deleteExam()<=====>\n" + examId);
-		boolean isSuccessful = true;//examService.deleteExamById(examId);
+		System.out.println("<=====>TeacherController  deleteExam() <=====>\n" + examId);
+		boolean isSuccessful = examService.deleteExamById(examId);
 		if (isSuccessful)
 			return ResponseEntity.status(HttpStatus.OK).body(new Response("Deleted Successfully"));
 		else
@@ -110,13 +105,13 @@ public class TeacherController {
 	// Through this API we get all Students whose status is "Pending" (account is
 	// not activated yet)
 	@CrossOrigin(origins = "http://localhost:4200")
-	@PostMapping("/pending-student")
+	@GetMapping("/pending-student")
 	@Secured("Teacher")
 	public ResponseEntity<List<Students>> getAllPendingStudents() {
 
 		System.out.println("<=====>AdminController  getAllPendingStudents()=====>");
 		List<Students> students = studentService.getStudentsByStatus("Pending");
-		if (students == null)
+		if (students != null)
 			return ResponseEntity.status(HttpStatus.OK).body(students);
 		else
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(students);
@@ -124,13 +119,13 @@ public class TeacherController {
 
 	// Through this API we get all Students whose status is "Accepted"
 	@CrossOrigin(origins = "http://localhost:4200")
-	@PostMapping("/accepted-student")
+	@GetMapping("/accepted-student")
 	@Secured("Teacher")
 	public ResponseEntity<List<Students>> getAllAcceptedStudents() {
 
 		System.out.println("<=====>AdminController  getAllAcceptedStudents()=====>");
 		List<Students> students = studentService.getStudentsByStatus("Accepted");
-		if (students == null)
+		if (students != null)
 			return ResponseEntity.status(HttpStatus.OK).body(students);
 		else
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(students);
@@ -139,24 +134,10 @@ public class TeacherController {
 	// This method is used to accept the Teacher Request by admin
 	@CrossOrigin(origins = "http://localhost:4200")
 	@Secured("Teacher")
-	@PostMapping("/approve-request/{email}")
+	@GetMapping("/approve-request/{email}")
 	public ResponseEntity<?> approveRequest(@PathVariable String email) {
 
 		System.out.println("<=====>AdminController   approveRequest()=====>" + email);
-
-		// Setting email information
-		// Email email = new Email();
-		// email.setCc(shopkeeperRepository.getOwnerEmailByShopEmail(shopEmail));
-		// email.setTo(shopEmail);
-		// email.setSubject("Shop has been approved.");
-		// email.setMessage(
-		// "Greetings for the day! \r\nThis mail is being sent to you by SalonSphere
-		// regarding your request for adding a shop.\r\n Congratulations your shop has
-		// been approved by our team. We wish you the best for you upcoming
-		// Journey.\r\n\r\n Thank you for connecting with us\r\nSalonSphere Inc. ");
-
-		// // calling Email Service
-		// EmailService.sendEmail(email);
 		studentService.updateStatus(email, "Accepted");
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
@@ -164,24 +145,10 @@ public class TeacherController {
 	// This method is used to reject the Teacher Request by admin
 	@CrossOrigin(origins = "http://localhost:4200")
 	@Secured("Teacher")
-	@PostMapping("/reject-request/{email}")
+	@GetMapping("/reject-request/{email}")
 	public ResponseEntity<?> rejectRequest(@PathVariable String email) {
 
 		System.out.println("<=====>AdminController  rejectRequest()=====>" + email);
-		// // Setting email information
-		// Email email = new Email();
-		// email.setCc(shopkeeperRepository.getOwnerEmailByShopEmail(shopEmail));
-		// email.setTo(shopEmail);
-		// email.setSubject("Shop has been rejected.");
-		// email.setMessage(
-		// "Greetings for the day! \r\nThis mail is being sent to you by SalonSphere
-		// regarding your request for adding a shop.\r\n Sorry to Inform you that the
-		// request for adding your Shop could not be considered due to incompatible
-		// details.\r\nYou can try again after 15 days .\r\n Thank You for Connecting
-		// with Us\r\n We wish you the best!!!\r\nSalonSphere Inc. ");
-
-		// // calling Email Service
-		// EmailService.sendEmail(email);
 		studentService.updateStatus(email, "rejected");
 		return new ResponseEntity<>(HttpStatus.OK);
 	}

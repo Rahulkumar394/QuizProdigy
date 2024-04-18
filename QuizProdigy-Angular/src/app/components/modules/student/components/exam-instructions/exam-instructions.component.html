@@ -1,4 +1,4 @@
-
+<!-- 
 <h2 mat-dialog-title>Install Angular</h2>
 <mat-dialog-content class="mat-typography">
     <h1>Exam Instructions</h1>
@@ -24,4 +24,27 @@
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>Cancel</button>
   <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Agree</button>
+</mat-dialog-actions> -->
+
+<!-- <h2 mat-dialog-title>Install Angular</h2> -->
+<mat-dialog-content class="mat-typography">
+  <div class="instructions-container">
+    <h1>{{ examTitle }}</h1>
+    <h2>{{ instructionsTitle }}</h2>
+    <ol>
+      <li *ngFor="let instruction of instructions">{{ instruction }}</li>
+    </ol>
+    <h2>{{ rulesTitle }}</h2>
+    <ul>
+      <li *ngFor="let rule of rules">{{ rule }}</li>
+    </ul>
+    
+    <p>{{ goodLuckMessage }}</p>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <!-- <button mat-button [mat-dialog-close]="true">Agree</button> -->
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Agree</button>
+  <!-- <button mat-button [mat-dialog-close]="true" cdkFocusInitial >Agree</button> -->
 </mat-dialog-actions>

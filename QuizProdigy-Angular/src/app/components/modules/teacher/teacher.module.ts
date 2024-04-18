@@ -21,13 +21,23 @@ import { MatSelectModule } from '@angular/material/select';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SetquestionComponent } from './components/setquestion/setquestion.component';
 import { UpdateQuestionComponent } from './components/update-question/update-question.component';
+import { ViewQuestionComponent } from './components/view-question/view-question.component';
+import { ManageStudentComponent } from './components/manage-student/manage-student.component';
+import { StudentInfoComponent } from './components/student-info/student-info.component';
+import { StudentRequestComponent } from './components/student-request/student-request.component';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
     DashboardComponent,
     NavbarComponent,
     SetquestionComponent,
-    UpdateQuestionComponent
+    UpdateQuestionComponent,
+    ViewQuestionComponent,
+    ManageStudentComponent,
+    StudentInfoComponent,
+    StudentRequestComponent
   ],
   imports: [
     CommonModule,
@@ -44,7 +54,9 @@ import { UpdateQuestionComponent } from './components/update-question/update-que
     MatInputModule,
     MatCardModule,
     MatStepperModule,
-    MatSelectModule,
+    MatSelectModule,MatTableModule,
+    MatPaginator,
+    MatPaginatorModule
     
   ],
 })

@@ -6,5 +6,15 @@ import { Component } from '@angular/core';
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
+toggleStudent: boolean=false;
+studentToggle() {
+  if(this.toggleStudent==false)
+    {
+      this.toggleStudent=true;
+    }
+    else{
+      this.toggleStudent=false;
+    }
+}
 
 }

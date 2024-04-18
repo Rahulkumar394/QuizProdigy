@@ -1,9 +1,10 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 
+import { ReactiveFormsModule } from '@angular/forms';
 import { AdminRoutingModule } from './admin-routing.module';
-import { NavbarComponent } from './components/navbar/navbar.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 // Material
 
@@ -16,17 +17,24 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
-import { ReactiveFormsModule } from '@angular/forms';
-import { ManageStudentsComponent } from './components/manage-students/manage-students.component';
-import { ManageTeachersComponent } from './components/manage-teachers/manage-teachers.component';
+import {
+  NgxMatDatetimePickerModule,
+  NgxMatTimepickerModule,
+} from '@angular-material-components/datetime-picker';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
+import { ExamScheduleComponent } from './components/exam-schedule/exam-schedule.component';
+import { HomeComponent } from './components/home/home.component';
 import { ManageExamComponent } from './components/manage-exam/manage-exam.component';
 import { ManageResultComponent } from './components/manage-result/manage-result.component';
-import { HomeComponent } from './components/home/home.component';
+import { ManageStudentsComponent } from './components/manage-students/manage-students.component';
+import { ManageTeachersComponent } from './components/manage-teachers/manage-teachers.component';
+import { SetExamDateComponent } from './components/set-exam-date/set-exam-date.component';
 import { TeacherInformationComponent } from './components/teacher-information/teacher-information.component';
-import {MatTableModule} from '@angular/material/table';
 import { TeacherRequestComponent } from './components/teacher-request/teacher-request.component';
-import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
-
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
 
 @NgModule({
   declarations: [
@@ -38,11 +46,17 @@ import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
     ManageResultComponent,
     HomeComponent,
     TeacherInformationComponent,
-    TeacherRequestComponent
+    TeacherRequestComponent,
+    SetExamDateComponent,
+    ExamScheduleComponent,
   ],
   imports: [
     CommonModule,
     AdminRoutingModule,
+    ReactiveFormsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatMomentDateModule,
 
     //
     MatToolbarModule,
@@ -56,6 +70,10 @@ import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
     MatTableModule,
     MatPaginator,
     MatPaginatorModule,
-  ]
+    MatButtonModule,
+    NgxMatDatetimePickerModule,
+    MatInputModule,
+    NgxMatTimepickerModule,
+  ],
 })
-export class AdminModule { }
+export class AdminModule {}

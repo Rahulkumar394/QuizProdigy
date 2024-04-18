@@ -8,6 +8,9 @@ import { ManageResultComponent } from './components/manage-result/manage-result.
 import { HomeComponent } from './components/home/home.component';
 import { TeacherInformationComponent } from './components/teacher-information/teacher-information.component';
 import { TeacherRequestComponent } from './components/teacher-request/teacher-request.component';
+import { SetExamDateComponent } from './components/set-exam-date/set-exam-date.component';
+import { ExamScheduleComponent } from './components/exam-schedule/exam-schedule.component';
+
 
 const routes: Routes = [
   {
@@ -16,6 +19,8 @@ const routes: Routes = [
       {path:'manage-student',component:ManageStudentsComponent},
       {path:'manage-teacher',component:ManageTeachersComponent},
       {path:'manage-exam',component:ManageExamComponent},
+      {path:'setExamDate',component:SetExamDateComponent},
+      {path:'setExam',component:ExamScheduleComponent},
       {path:'manage-result',component:ManageResultComponent},
       {path:'teacher-information',component:TeacherInformationComponent},
       {path:'teacher-request',component:TeacherRequestComponent},

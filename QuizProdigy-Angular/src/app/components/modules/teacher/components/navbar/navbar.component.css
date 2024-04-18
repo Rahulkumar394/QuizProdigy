@@ -25,4 +25,7 @@
   *::-webkit-scrollbar {
     width: 0;
   }
+  .sub-option {
+    margin-left: 20px;
   
+  }

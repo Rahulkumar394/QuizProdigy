@@ -1,65 +1,79 @@
 <mat-toolbar>
-    <button mat-icon-button (click)="sidenav.toggle()" id="menuIcon">
-      <mat-icon>menu</mat-icon>
-    </button>
-  
-    <span id="menuTitle">QuizProdigy</span>
-    <div class="nav-buttons">
-      <a mat-button routerLink="/teacher" class="top-menu-item">Homes</a>
-      <a mat-button routerLink="/teacher/setQuestion" class="top-menu-item"
-        >Set Question Paper</a
-      >
-      <a mat-button routerLink="/teacher" class="top-menu-item">About</a>
-      <a mat-button routerLink="/teacher" class="top-menu-item"
-        >Contact Us</a
+  <button mat-icon-button (click)="sidenav.toggle()" id="menuIcon">
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <span id="menuTitle">QuizProdigy</span>
+  <div class="nav-buttons">
+    <a mat-button routerLink="/teacher" class="top-menu-item">Homes</a>
+    <a mat-button routerLink="/teacher/setQuestion" class="top-menu-item"
+      >Set Question Paper</a
+    >
+    <a mat-button routerLink="/teacher/viewQuestion" class="top-menu-item"
+      >ViewQuestion</a
+    >
+    <a mat-button routerLink="/teacher" class="top-menu-item">Contact Us</a>
+  </div>
+</mat-toolbar>
+
+<mat-sidenav-container>
+  <mat-sidenav #sidenav [fixedInViewport]="true" [fixedTopGap]="70" mode="side">
+    <div>
+      <a
+        (click)="sidenav.close()"
+        mat-button
+        routerLink="/teacher/setQuestion"
+        class="side-menu-item"
+        ><mat-icon>home</mat-icon>Set Paper</a
       >
     </div>
-  </mat-toolbar>
-  
-  <mat-sidenav-container>
-    <mat-sidenav #sidenav [fixedInViewport]="true" [fixedTopGap]="70" mode="side">
+
+    <div>
+      <a
+        (click)="sidenav.close()"
+        mat-button
+        routerLink="/teacher/updateQuestion"
+        class="side-menu-item"
+        ><mat-icon>settings</mat-icon>Update Paper</a
+      >
+    </div>
+
+    <div>
+      <a
+        (click)="sidenav.close()"
+        mat-button
+        routerLink="/teacher/viewQuestion"
+        class="side-menu-item"
+        ><mat-icon>search</mat-icon>Viwe Paper</a
+      >
+    </div>
+
+    <div>
+      <a
+        (click)="studentToggle()"
+        mat-button
+        routerLink="/teacher/manage-student"
+        class="side-menu-item"
+        ><mat-icon>contact_support</mat-icon>Manage Student</a
+      >
+    </div>
+    <div *ngIf="toggleStudent" class="sub-option">
       <div>
-        <a
-          (click)="sidenav.close()"
-          mat-button
-          routerLink="/admin/admin-home"
-          class="side-menu-item"
-          ><mat-icon>home</mat-icon>Home</a
+        <a mat-button routerLink="/teacher/student-info" class="side-menu-item"
+          >Student Information</a
         >
       </div>
-  
       <div>
         <a
-          (click)="sidenav.close()"
           mat-button
-          routerLink="/teacher/updateQuestion"
+          routerLink="/teacher/student-request"
           class="side-menu-item"
-          ><mat-icon>settings</mat-icon>Update Exam</a
+          >Request Student</a
         >
       </div>
-  
-      <div>
-        <a
-          (click)="sidenav.close()"
-          mat-button
-          routerLink="/admin/about"
-          class="side-menu-item"
-          ><mat-icon>search</mat-icon>About Us</a
-        >
-      </div>
-  
-      <div>
-        <a
-          (click)="sidenav.close()"
-          mat-button
-          routerLink="/admin/contact"
-          class="side-menu-item"
-          ><mat-icon>contact_support</mat-icon>Contact Us</a
-        >
-      </div>
-    </mat-sidenav>
-    <mat-sidenav-content>
-      <router-outlet></router-outlet>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
-  
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

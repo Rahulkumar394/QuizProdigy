@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ExamInstructionsComponent } from '../exam-instructions/exam-instructions.component';
 import { Router } from '@angular/router';
+import { GetexamcodeComponent } from '../getexamcode/getexamcode.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,12 +16,14 @@ export class DashboardComponent implements OnInit {
   }
 
   openDialog() {
-    const dialogRef = this.dialog.open(ExamInstructionsComponent);
+     const dialogRef = this.dialog.open(ExamInstructionsComponent);
+     //const dialogRef = this.dialog.open(GetexamcodeComponent);
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
       if(`${result}`){
-        this.router.navigateByUrl('/student/takeexam');
+         this.router.navigateByUrl('/student/takeexam');
+           
       }else{
         return;
       }

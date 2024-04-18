@@ -1,0 +1,8 @@
+<div class="exam-code-container">
+    <h2>Enter Exam Code</h2>
+    <label for="examCodeInput">Exam Code <span>*</span></label>
+    <input type="text" id="examCodeInput" [(ngModel)]="examCode" (input)="updateExamCodeFilled()">
+    <button mat-raised-button color="primary" mat-button  [disabled]="!isExamCodeFilled" (click)="getExam()">Start Exam</button>
+
+  </div>
+  

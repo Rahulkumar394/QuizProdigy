@@ -41,6 +41,7 @@ public class SecurityConfiguration {
 						.requestMatchers("/register-teacher").permitAll()
 						.requestMatchers("/admin/**").permitAll()
 						.requestMatchers("/teacher/**").permitAll()
+						.requestMatchers("/student/**").permitAll()
 						.anyRequest().authenticated())
 				.exceptionHandling(ex -> ex.authenticationEntryPoint(point))
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));

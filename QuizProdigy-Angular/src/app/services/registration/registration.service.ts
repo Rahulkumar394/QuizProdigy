@@ -11,25 +11,6 @@ export class RegistrationService {
   registerUser(userData: any, role: any) {
     console.log('Come inside RegisterService =>', userData);
 
-    // //create student interface
-    // interface student {
-    //   name: string;
-    //   email: string;
-    //   contactNumber: string;
-    //   instituteName: string;
-    //   enrollment: string;
-    //   password: string;
-    // }
-
-    // //create student interface
-    // interface teacher {
-    //   name: string;
-    //   email: string;
-    //   contactNumber: string;
-    //   instituteName: string;
-    //   employeeNo: string;
-    //   password: string;
-    // }
 
     if (role === 'Student') {
       const studentData = {
@@ -37,6 +18,7 @@ export class RegistrationService {
         studentId: userData.email,
         contactNo: userData.contactNumber,
         instituteName: userData.instituteName,
+        department: userData.department,
         enrollment: userData.enrollment,
         password: userData.password
       };

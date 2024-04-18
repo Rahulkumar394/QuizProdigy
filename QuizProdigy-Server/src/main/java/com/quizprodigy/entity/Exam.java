@@ -1,5 +1,6 @@
 package com.quizprodigy.entity;
 
+import java.sql.Time;
 import java.util.Date;
 import java.util.List;
 
@@ -30,16 +31,16 @@ public class Exam {
     @Column(name = "exam_id")
     private String examId;
 
-    @Column(name = "subject_name",nullable = false)
+    @Column(name = "subject_name", nullable = false)
     private String subjectName;
 
-    @Column(name = "total_questions",nullable = false)
+    @Column(name = "total_questions", nullable = false)
     private int totalQuestions;
 
-    @Column(name = "total_time",nullable = false)
+    @Column(name = "total_time", nullable = false)
     private int totalTime;
 
-    @Column(name = "created_date",nullable = false)
+    @Column(name = "created_date", nullable = false)
     private Date createdDate;
 
     @Column(name = "modify_date")
@@ -51,6 +52,21 @@ public class Exam {
     @Column(name = "is_hands_on")
     private boolean isHandsOn;
 
+    // through this we can set exam date
+    @Column(name = "exam_date")
+    private Date examDate;
+    
+    @Column(name = "exam_time")
+    private String examTime;
+
+    // through this we can start exam
+    @Column(name = "isStart")
+    private boolean isStart;
+
+    // through this column we can check exam status exam done or not
+    @Column(name = "exam_status")
+    private String examStatus;
+
     @ManyToOne
     @JoinColumn(name = "teacherId")
     @JsonIgnore // Exclude this field from JSON serialization
@@ -60,21 +76,6 @@ public class Exam {
     @JsonIgnore // Exclude this field from JSON serialization
     private List<Question> questions;
 
-//    @Override
-//    public String toString() {
-//        return "Exam{" +
-//                "examId='" + examId + '\'' +
-//                ", subjectName='" + subjectName + '\'' +
-//                ", totalQuestions=" + totalQuestions +
-//                ", totalTime=" + totalTime +
-//                ", createdDate=" + createdDate +
-//                ", modifyDate=" + modifyDate +
-//                ", isDelete=" + isDelete +
-//                ", isHandsOn=" + isHandsOn +
-//                ", teacherId=" +  (teacherId != null ? teacherId.getTeacherId() :null) +// Indicate teacherId is excluded
-//                ", questionsCount=" + (questions != null ? questions.size() : 0) +
-//                '}';
-//    }
     @Override
     public String toString() {
         String teacherIdString = teacherId != null ? teacherId.getTeacherId() : "NA";
@@ -88,6 +89,9 @@ public class Exam {
                 ", modifyDate=" + modifyDate +
                 ", isDelete=" + isDelete +
                 ", isHandsOn=" + isHandsOn +
+                ", examDate=" + examDate +
+                ", isStart=" + isStart +
+                ", examStatus=" + examStatus +
                 ", teacherId='" + teacherIdString + '\'' +
                 ", questionsCount=" + questionsCount +
                 '}';

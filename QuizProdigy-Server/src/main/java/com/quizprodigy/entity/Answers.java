@@ -29,8 +29,8 @@ public class Answers {
     private String correctAnswer;
 
     @ManyToOne
-    @JoinColumn(name = "questionId")
-    @JsonIgnore // Exclude this field from JSON serialization
+    @JoinColumn(name = "question_id") // Match the column name in your database (could be questionId)
+    @JsonIgnore // Exclude this field from JSON serialization (optional)
     private Question questionId;
     
     @Override

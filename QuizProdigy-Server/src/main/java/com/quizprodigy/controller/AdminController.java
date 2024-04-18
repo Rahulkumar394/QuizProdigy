@@ -9,11 +9,17 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.quizprodigy.dto.ExamScheduleDTO;
+import com.quizprodigy.dto.ExamTimeTableDTO;
 import com.quizprodigy.entity.Students;
 import com.quizprodigy.entity.Teachers;
+import com.quizprodigy.response.Response;
+import com.quizprodigy.service.ExamService;
 import com.quizprodigy.service.StudentService;
 import com.quizprodigy.service.TeacherService;
 
@@ -25,6 +31,8 @@ public class AdminController {
 	private TeacherService teacherService;
 	@Autowired
 	private StudentService studentService;
+	@Autowired
+	private ExamService examService;
 
 	// Through this API we get all Teachers whose status is "Pending" (account is
 	// not activated yet)
@@ -63,7 +71,6 @@ public class AdminController {
 
 		System.out.println("<=====>AdminController  getAllAcceptedStudent()=====>");
 		List<Students> students = studentService.getStudentsByStatus("Accepted");
-		System.out.println("==========>" + students);
 		return ResponseEntity.status(HttpStatus.OK).body(students);
 
 	}
@@ -72,22 +79,65 @@ public class AdminController {
 	@CrossOrigin(origins = "http://localhost:4200")
 	@Secured("admin")
 	@GetMapping("/approve-request/{email}")
-	public ResponseEntity<?> approveRequest(@PathVariable String email) {
+	public ResponseEntity<Response> approveRequest(@PathVariable String email) {
 
 		System.out.println("<=====>AdminController approveRequest()=====>" + email);
 		teacherService.updateStatus(email, "Accepted");
-		return new ResponseEntity<>(HttpStatus.OK);
+		return ResponseEntity.status(HttpStatus.OK).body(new Response("Success"));
 	}
 
 	// This method is used to reject the Teacher Request by admin
 	@CrossOrigin(origins = "http://localhost:4200")
 	@Secured("admin")
 	@GetMapping("/reject-request/{email}")
-	public ResponseEntity<?> rejectRequest(@PathVariable String email) {
+	public ResponseEntity<Response> rejectRequest(@PathVariable String email) {
 
 		System.out.println("<=====>AdminController  rejectRequest()=====>" + email);
 		teacherService.updateStatus(email, "Rejected");
-		return new ResponseEntity<>(HttpStatus.OK);
+		return ResponseEntity.status(HttpStatus.OK).body(new Response("Success"));
+	}
+
+	// Set exam time table through examid
+	@CrossOrigin(origins = "http://localhost:4200")
+	@Secured("admin")
+	@PostMapping("/set-exam-timetable")
+	public ResponseEntity<Response> setExamtimeTable(@RequestBody ExamTimeTableDTO examTimeTableDTO) {
+
+		System.out.println("<=====>AdminController  setExamtimeTable()=====>" + examTimeTableDTO);
+		boolean isSet = examService.setExamTimeTable(examTimeTableDTO);
+		if (isSet) {
+			return ResponseEntity.status(HttpStatus.OK).body(new Response("Success"));
+		}
+		return ResponseEntity.status(HttpStatus.OK).body(new Response("Failure"));
+	}
+
+	// Set exam isstart flag STARTES that means exam is start now by examid
+	@CrossOrigin(origins = "http://localhost:4200")
+	@Secured("admin")
+	@GetMapping("/start-exam/{examId}")
+	public ResponseEntity<Response> startExam(@PathVariable String examId) {
+
+		System.out.println("<=====>AdminController  startExam()=====>" + examId);
+		boolean isSet = examService.startExam(examId);
+		if (isSet) {
+			ResponseEntity.status(HttpStatus.OK).body(new Response("Success"));
+		}
+		return ResponseEntity.status(HttpStatus.OK).body(new Response("Failure"));
+	}
+
+	// through this method we gat exam info which is not scheduale yet
+	@CrossOrigin(origins = "http://localhost:4200")
+	@Secured("admin")
+	@GetMapping("examInfo")
+	public ResponseEntity<List<ExamScheduleDTO>> getExamInfom() {
+
+		System.out.println("<=====>AdminController  getExamInfom()=====>");
+		List<ExamScheduleDTO> examScheduleDTO = examService.getExamInfo();
+		System.out.println("Resonse=========>\n"+examScheduleDTO);
+		if (!examScheduleDTO.isEmpty()) {
+			return ResponseEntity.status(HttpStatus.OK).body(examScheduleDTO);
+		}
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(examScheduleDTO);
 	}
 
 }

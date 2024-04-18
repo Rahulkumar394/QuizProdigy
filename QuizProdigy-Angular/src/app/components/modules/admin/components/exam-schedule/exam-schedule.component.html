@@ -1,0 +1,44 @@
+<!-- <form [formGroup]="dateTimeForm" class="datetime-picker-form">
+    <mat-form-field appearance="outline">
+      <mat-label>Select Date</mat-label>
+      <input matInput [matDatepicker]="picker" placeholder="Choose a date" formControlName="selectedDate">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Select Time</mat-label>
+      <input matInput type="time" formControlName="selectedTime">
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="onSubmit()">Set</button>
+  </form>
+   -->
+
+
+
+   
+   <div class="dialog-container">
+    <form [formGroup]="dateTimeForm" class="datetime-picker-form">
+      <mat-form-field appearance="outline">
+        <mat-label>Select Date</mat-label>
+        <!-- <input matInput [matDatepicker]="picker" placeholder="Choose a date" formControlName="selectedDate" [disabled]="true"> -->
+        <input matInput [matDatepicker]="picker" placeholder="Choose a date" formControlName="selectedDate"  (keydown)="preventTyping($event)" [min]="minDate | date:'yyyy-MM-dd'">
+
+        <mat-datepicker-toggle matSuffix [for]="picker">
+          <mat-icon>calendar_today</mat-icon>
+        </mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Select Time</mat-label>
+        <!-- <input matInput type="time" formControlName="selectedTime"> -->
+        <input matInput type="time" formControlName="selectedTime"  [max]="maxTime()">
+  
+      </mat-form-field>
+      <button mat-raised-button color="primary" (click)="onSubmit()">Set</button>
+      <button mat-icon-button class="close-btn" (click)="closeDialog()">
+        <mat-icon style="color: red;">close</mat-icon>
+      </button>
+    </form>
+  </div>
+  
+  

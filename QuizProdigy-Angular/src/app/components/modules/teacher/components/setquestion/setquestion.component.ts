@@ -202,7 +202,7 @@ export class SetquestionComponent implements OnInit {
   validateExamDetails(data: any) {
     console.log("data=>",data);
     let message = '';
-    if (!data.subjectName || data.subjectName == '') {
+    if (!data.subjectName.trim() || data.subjectName.trim() == '') {
       message = 'Name field cannot be empty.';
       return message;
     } else if (data.totalQuestions <= 0) {

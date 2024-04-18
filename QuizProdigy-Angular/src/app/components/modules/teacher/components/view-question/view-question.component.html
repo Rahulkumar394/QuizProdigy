@@ -1,0 +1,82 @@
+<mat-stepper [linear]="isLinear" #stepper>
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>Select Exam ID</ng-template>
+      <div class="select-exam">
+        <mat-form-field appearance="fill">
+          <mat-label style="color: rgb(172, 233, 112)">Exam ID</mat-label>
+          <mat-select
+            (change)="selectExamId()"
+            formControlName="examId"
+            required
+          >
+            <!-- formControlName="examId" -->
+            <mat-option *ngFor="let id of examIds" [value]="id">{{
+              id
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button mat-raised-button (click)="selectExamId()">Next</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <!-- 1ST STEP END 2ND START FROM HERE -->
+
+  <mat-step [stepControl]="setExam" label="View Exam & Question">
+    <button
+      style="position: absolute; left: 80vw"
+      mat-raised-button
+      routerLink="/teacher"
+    >
+      Go to Dashboard
+    </button>
+    <ng-template matStepLabel>Preview Exam</ng-template>
+    <div class="container">
+      <div class="exam-details">
+        <h2>Exam Details Preview</h2>
+        <table class="details-table">
+          <tbody>
+            <tr>
+              <th>Exam Name:</th>
+              <td>{{ setExam.value.subjectName }}</td>
+            </tr>
+            <tr>
+              <th>Total Questions:</th>
+              <td>{{ setExam.value.totalQuestions }}</td>
+            </tr>
+            <tr>
+              <th>Total Time:</th>
+              <td>{{ setExam.value.totalTime }} minutes</td>
+            </tr>
+            <tr>
+              <th>Hands On Exam:</th>
+              <td>{{ setExam.value.handsOn ? "Yes" : "No" }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <button mat-raised-button (click)="viewQuestion()">Next</button>
+      </div>
+    </div>
+  </mat-step>
+  <!-- 2ND STEPPER END AND 3RD STEPPER START S HERE -->
+  <mat-step [stepControl]="setquestion" label="Set Your Questions">
+  <div class="container">
+    <div class="questions-preview">
+      <h2>Questions Preview</h2>
+      <div *ngFor="let question of setquestion.controls | keyvalue" class="question-card">
+        <!-- <h1>{{question.key}}{{question.value}}</h1> -->
+        <div class="question-text">{{ question.value.get('question')?.value }}</div>
+        <div class="options">
+          <div class="option">A. {{ question.value.get('optionA')?.value }}</div>
+          <div class="option">B. {{ question.value.get('optionB')?.value }}</div>
+          <div class="option">C. {{ question.value.get('optionC')?.value }}</div>
+          <div class="option">D. {{ question.value.get('optionD')?.value }}</div>
+        </div>
+        <div class="answer">Correct Answer: {{ question.value.get('answer')?.value }}</div>
+      </div>
+    </div>
+  </div>
+</mat-step>
+ 
+</mat-stepper>
