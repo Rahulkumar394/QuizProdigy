@@ -272,9 +272,19 @@ export class UpdateQuestionComponent implements OnInit {
       .subscribe(
         (data: any) => {
           console.log('Update question list is ', data);
+          Swal.fire({
+            icon:'success',
+            title:'Done',
+            text:'Question Update Sucessful'
+          })
         },
         (error: any) => {
           console.log('Error in updating question list is ', error);
+          Swal.fire({
+            icon:'error',
+            title:'Failure',
+            text:error
+          })
         }
       );
   }

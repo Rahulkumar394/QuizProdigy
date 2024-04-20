@@ -69,6 +69,7 @@ export class SetExamDateComponent implements OnInit {
 
   scheduleExam(examId: string) {
     console.log('Exami id', examId);
+    localStorage.setItem('examId',examId);
     this.route.navigateByUrl('admin/setExam');
   }
 }

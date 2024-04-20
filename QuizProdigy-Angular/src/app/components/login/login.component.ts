@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit {
 
     this.loginService.login(this.loginForm.value).subscribe(
       (data: any) => {
-        console.log('Login Successfull', success + data.value);
+        console.log('Login Successfull', success + data);
         Cookie.set('token', data.jwtToken); 
         Cookie.set('name', data.name);
         Cookie.set('role', data.role);

@@ -134,7 +134,7 @@ public class AdminController {
 		System.out.println("<=====>AdminController  getExamInfom()=====>");
 		List<ExamScheduleDTO> examScheduleDTO = examService.getExamInfo();
 		System.out.println("Resonse=========>\n"+examScheduleDTO);
-		if (!examScheduleDTO.isEmpty()) {
+		if (examScheduleDTO!=null) {
 			return ResponseEntity.status(HttpStatus.OK).body(examScheduleDTO);
 		}
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(examScheduleDTO);

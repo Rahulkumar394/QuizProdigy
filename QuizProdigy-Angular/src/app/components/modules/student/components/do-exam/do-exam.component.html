@@ -27,8 +27,8 @@
     opened=""
   >
     <div class="totalQuestion">
-      <div class="questionNo" *ngFor="let number of sno; let i = index">
-        <h4>{{ i + 1 }}</h4>
+      <div class="questionNo" *ngFor="let number of sno; let i = index" >
+        <h4 (click)="naviagteQuestion(i+1)">{{ i + 1 }}</h4>
       </div>
     </div>
     <div class="questionStatus">
@@ -42,19 +42,19 @@
         <div class="qStatus" style="background-color: red">
           <span>0</span>
         </div>
-        <p>Not Seen</p>
+        <p>Not Answered</p>
       </div>
       <div class="status">
         <div class="qStatus" style="background-color: green">
           <span>0</span>
         </div>
-        <p>Not Seen</p>
+        <p>Answered</p>
       </div>
       <div class="status">
         <div class="qStatus" style="background-color: purple">
           <span>0</span>
         </div>
-        <p>Not Seen</p>
+        <p>Marked for Review</p>
       </div>
     </div>
   </mat-sidenav>
@@ -65,7 +65,7 @@
 
 <!-- CENTER DIV FOE QUESTION  DISPLAY -->
 
-<div class="questionContainer">
+<!-- <div class="questionContainer">
   <div class="question">
     <p>
       1>What is The Microservices Answer Skip to main content Why Spring Overview
@@ -100,7 +100,26 @@
     <button mat-raised-button>Previous</button>
     <button mat-raised-button>Next</button>
   </div>
+</div> -->
+
+
+<div class="questionContainer">
+  <div class="question" *ngIf="question"> <!-- Add ngIf to check if question is defined -->
+    <p>{{ question.question.value }}</p> <!-- Display the question -->
+  </div>
+  <div class="option" *ngIf="question"> <!-- Add ngIf to check if question is defined -->
+    <!-- Loop through options if needed -->
+    <div class="option-btn" *ngFor="let option of question.options">
+      <input type="radio" name="option" [id]="option.id" (click)="getAnswer(option.value, question.question.id)"/>
+      <label [for]="option.id">{{ option.value }}</label>
+    </div>
+  </div>
+  <div class="btn">
+    <button mat-raised-button (click)="previousQuestion()">Previous</button> <!-- Call previousQuestion() function on button click -->
+    <button mat-raised-button (click)="nextQuestion()">Next</button> <!-- Call nextQuestion() function on button click -->
+  </div>
 </div>
+
 
 
 <!-- RIGHT SIDE NAV BAR -->
@@ -120,6 +139,6 @@
     </div>
     <div class="userName"><h3>Rahul Kumar</h3></div>
     <button mat-raised-button>Need Help</button>
-    <button mat-raised-button>Submit</button>
+    <button mat-raised-button (click)="doSubitExam()">Submit</button>
   </mat-sidenav>
 </mat-sidenav-container>

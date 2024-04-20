@@ -10,6 +10,7 @@ export class TeacherService {
 
   // through this service method we call the API to set a Exam and it's questions,options and answer
   setExamWithQuestion(exam: any, questionList: any) {
+   
     const headers = new HttpHeaders().set(
       'Authorization',
       'Bearer ' + Cookie.get('token')
@@ -18,6 +19,7 @@ export class TeacherService {
       exam: exam,
       questions: questionList,
     };
+    console.log("le obj print kara diya",obj.exam);
     return this.http.post(
       'http://localhost:8080/teacher/set-exam-question',     obj,      { headers }
     );

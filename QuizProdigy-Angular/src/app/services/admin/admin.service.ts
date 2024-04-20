@@ -90,6 +90,7 @@ export class AdminService {
       examTime: time,
       examId: localStorage.getItem('examId'),
     };
+    console.log("SET DATE TIME INSIDE SERVICE ",body);
     return this.http.post(
       'http://localhost:8080/admin/set-exam-timetable ',
       body,

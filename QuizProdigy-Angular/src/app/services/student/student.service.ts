@@ -6,6 +6,7 @@ import { Cookie } from 'ng2-cookies';
   providedIn: 'root',
 })
 export class StudentService {
+  answerMap: any;
   constructor(private http: HttpClient) {}
 
 
@@ -23,5 +24,20 @@ export class StudentService {
       'Bearer ' + Cookie.get('token')
     );
     return this.http.get('http://localhost:8080/student/take-exam/'+examId, { headers });
+  }
+
+  submitExam(answer:any){
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      'Bearer ' + Cookie.get('token')
+    );   
+    const obj={
+      studentId:Cookie.get('userId'),
+      examId:localStorage.getItem('examId'),
+      answerList:answer
+    };
+
+    console.log("PRINT answer Inside submitExam student Service OBJECT+",obj);
+    return this.http.post('http://localhost:8080/student/submitExam', obj , { headers });
   }
 }

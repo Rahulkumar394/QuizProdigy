@@ -1,6 +1,5 @@
 package com.quizprodigy.entity;
 
-import java.sql.Time;
 import java.util.Date;
 import java.util.List;
 
@@ -10,8 +9,6 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -55,7 +52,7 @@ public class Exam {
     // through this we can set exam date
     @Column(name = "exam_date")
     private Date examDate;
-    
+
     @Column(name = "exam_time")
     private String examTime;
 
@@ -67,10 +64,11 @@ public class Exam {
     @Column(name = "exam_status")
     private String examStatus;
 
-    @ManyToOne
-    @JoinColumn(name = "teacherId")
-    @JsonIgnore // Exclude this field from JSON serialization
-    private Teachers teacherId;
+    @Column(name = "teacher_id")
+    private String teacherId;
+
+    @Column(name = "cut_off_marks")
+    private float cutOffMarks;
 
     @OneToMany(mappedBy = "exam", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore // Exclude this field from JSON serialization
@@ -78,7 +76,6 @@ public class Exam {
 
     @Override
     public String toString() {
-        String teacherIdString = teacherId != null ? teacherId.getTeacherId() : "NA";
         String questionsCount = questions != null ? String.valueOf(questions.size()) : "0";
         return "Exam{" +
                 "examId='" + examId + '\'' +
@@ -92,7 +89,8 @@ public class Exam {
                 ", examDate=" + examDate +
                 ", isStart=" + isStart +
                 ", examStatus=" + examStatus +
-                ", teacherId='" + teacherIdString + '\'' +
+                ", teacherId='" + teacherId +
+                ", cutOffMarks=" + cutOffMarks +
                 ", questionsCount=" + questionsCount +
                 '}';
     }

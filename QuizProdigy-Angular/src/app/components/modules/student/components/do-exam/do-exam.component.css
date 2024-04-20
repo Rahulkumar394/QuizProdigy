@@ -206,10 +206,6 @@
 .option {
   padding: 25px 10px;
   margin-top: 10px;
-  /* background-color: rgb(144, 113, 113); */
-  /* display: flex; */
-  /* flex-direction: column; */
-  /* flex-wrap: wrap; */
   font-size: 16px;
   column-gap: 50px;
   margin-left: 10px;
@@ -239,7 +235,6 @@ button {
 }
 
 .btn{
-
   position: absolute;
   bottom: 5%;
   left: 50%;

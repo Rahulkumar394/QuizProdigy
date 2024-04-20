@@ -37,9 +37,6 @@ public class Performance {
 	@Column(name = "correct_answer", nullable = false)
 	private int correctAnswer;
 
-	@Column(name = "employee_no", unique = true)
-	private String employeeNo;
-
 	@Column(name = "percentage", nullable = false)
 	private double percentage; // calculated as (correct answer/ total question)*100
 
@@ -52,30 +49,30 @@ public class Performance {
 	@Column(name = "isdeleted", nullable = false)
 	private boolean isDeleted;
 
-	 @ManyToOne
-	  @JoinColumn(name = "student_id") // Match the column name in your database
-	  private Students student;
+	@ManyToOne
+	@JoinColumn(name = "student_id") // Match the column name in your database
+	private Students student;
 
 	@ManyToOne
 	@JoinColumn(name = "examId")
-	private Exam examId;
-	
-	
-	 @Override
-	    public String toString() {
-	        return "Performance{" +
-	                "performanceId='" + performanceId + '\'' +
-	                ", totalQuestion=" + totalQuestion +
-	                ", attemptedQuestion=" + attemptedQuestion +
-	                ", unattemptedQuestion=" + unattemptedQuestion +
-	                ", correctAnswer=" + correctAnswer +
-	                ", employeeNo='" + employeeNo + '\'' +
-	                ", percentage=" + percentage +
-	                ", createdDate=" + createdDate +
-	                ", modifyDate=" + modifyDate +
-	                ", isDeleted=" + isDeleted +
-	                ", studentId='" + (student != null ? student.getStudentId() : null) + '\'' + // Avoid infinite loop, print only student ID
-	                ", examId='" + (examId != null ? examId.getExamId() : null) + '\'' + // Avoid infinite loop, print only exam ID
-	                '}';
-	    }
+	private Exam exam;
+
+	@Override
+	public String toString() {
+		return "Performance{" +
+				"performanceId='" + performanceId + '\'' +
+				", totalQuestion=" + totalQuestion +
+				", attemptedQuestion=" + attemptedQuestion +
+				", unattemptedQuestion=" + unattemptedQuestion +
+				", correctAnswer=" + correctAnswer +
+				", percentage=" + percentage +
+				", createdDate=" + createdDate +
+				", modifyDate=" + modifyDate +
+				", isDeleted=" + isDeleted +
+				", studentId='" + (student != null ? student.getStudentId() : null) + '\'' + // Avoid infinite loop,
+																								// print only student ID
+				", examId='" + (exam != null ? exam.getExamId() : null) + '\'' + // Avoid infinite loop, print only
+																						// exam ID
+				'}';
+	}
 }

@@ -77,7 +77,6 @@ public class ExamService {
 					question.setQuestion((q.getQuestion()));// set actual question inside question object
 					question.setExam(exam); // Setting up foreign key reference
 					question.setQuestionId(UUID.randomUUID().toString()); // Generating random UUID as Question Id
-					System.out.println(question.getQuestionId() + "Hello Bha9i Question ID Wale6548647532153876854132");
 					// Setting option
 					List<String> oList = q.getOptions();
 					for (String option : oList) {

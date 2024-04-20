@@ -37,9 +37,9 @@ export class GetexamcodeComponent {
           this.router.navigateByUrl('/student/examInstruction');
         },
         (error: any) => {
-          console.log('ERROR exam set hone mai aa raha ahi', error.status);
           Swal.fire({
             icon: 'error',
+            title:'Not Found',
             text: 'Exam code is invalid!',
           });
         }

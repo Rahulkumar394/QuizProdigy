@@ -31,7 +31,7 @@ public class Users implements UserDetails {
 	private String userId;
 
 	@Column(name = "user_name", nullable = false)
-	private String userName;
+	private String name;
 
 	@Column(name = "user_role", nullable = false)
 	private String role;

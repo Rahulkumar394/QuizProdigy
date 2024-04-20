@@ -54,7 +54,7 @@ public class TeacherService {
                 // Create users entity object and save it to the database
                 Users users = new Users();
                 users.setUserId(teachers.getTeacherId());
-                users.setUserName(teachers.getTeacherName());
+                users.setName(teachers.getTeacherName());
                 users.setRole("Teacher");
                 users.setPassword(teachers.getPassword());
 

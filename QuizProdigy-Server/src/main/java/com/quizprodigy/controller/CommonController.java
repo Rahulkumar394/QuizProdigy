@@ -29,7 +29,7 @@ public class CommonController {
     @Autowired
     private UserDetailsService userDetailsService;
     @Autowired
-    private JwtHelper helper;    
+    private JwtHelper helper;
     @Autowired
     private AuthenticationManager manager;
     @Autowired
@@ -44,10 +44,10 @@ public class CommonController {
     @PostMapping("/register-teacher")
     public ResponseEntity<Response> registerTeacher(@RequestBody Teachers teacher) {
 
-        System.out.println("<=====Common controller RegisterTeacher()=====>\n"+teacher);
+        System.out.println("<=====Common controller RegisterTeacher()=====>\n" + teacher);
 
         Response registerResponse = new Response();
-        boolean isRegistered =teacherService.addTeacher(teacher);
+        boolean isRegistered = teacherService.addTeacher(teacher);
 
         if (isRegistered) {
             registerResponse.setResponseStatus("Register Successful");
@@ -63,7 +63,7 @@ public class CommonController {
     @PostMapping("/register-student")
     public ResponseEntity<Response> RegisterStudent(@RequestBody Students students) {
 
-        System.out.println("<=====Common controller RegisterStudent()=====>\n"+students);
+        System.out.println("<=====Common controller RegisterStudent()=====>\n" + students);
         Response registerResponse = new Response();
         boolean isRegister = studentService.addStudent(students);
 
@@ -81,16 +81,16 @@ public class CommonController {
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest) {
 
-        System.out.println("<=====Common controller login()=====>\n"+loginRequest);
+        System.out.println("<=====Common controller login()=====>\n" + loginRequest);
 
         this.doAuthenticate(loginRequest.getUserId(), loginRequest.getPassword());
         LoginResponse loginResponse = userService.loginUser(loginRequest);
-
         if (loginResponse != null) {
             UserDetails userDetails = userDetailsService.loadUserByUsername(loginRequest.getUserId());
             String token = this.helper.generateToken(userDetails);
-
             loginResponse.setJwtToken(token);
+            System.out.println("login Response====>" + loginResponse);
+
             return new ResponseEntity<>(loginResponse, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(loginResponse, HttpStatus.BAD_REQUEST);

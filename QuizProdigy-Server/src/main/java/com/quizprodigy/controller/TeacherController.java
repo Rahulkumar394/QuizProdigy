@@ -35,7 +35,7 @@ public class TeacherController {
 	@PostMapping("/set-exam-question")
 	public ResponseEntity<Response> setExamQuestion(@RequestBody SetQuestionAnswerRequest questions) {
 
-		System.out.println("<=====>TeacherController  setExamQuestion()=====>\n" + questions);
+		System.out.println("<=====>TeacherController  setExamQuestion()=====>\n" + questions.getExam());
 		boolean isSuccessful = examService.setExamQuestionPaper(questions);
 		if (isSuccessful)
 			return ResponseEntity.status(HttpStatus.OK).body(new Response("Exam added Successfully"));

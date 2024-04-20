@@ -23,7 +23,8 @@ export class ViewQuestionComponent implements OnInit {
   setquestion!: FormGroup; // 3rdFormGroup: FormGroup;
   exam: any;
   examIds: any;
-  questions: any;
+  question: any;
+  questions: any[] = [];
   totalQuestions: any;
   currentQuestionIndex: any = 0;
 

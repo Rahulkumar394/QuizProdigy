@@ -43,16 +43,36 @@ public class UserService {
 	// Login user and return login response
 	public LoginResponse loginUser(LoginRequest loginRequest) {
 
+
+		// Optional<Users> exitingUser = userRepository.findById(loginRequest.getUserId());
+		// if (exitingUser.isPresent()) {
+		// 	Users findUser = exitingUser.get();
+		// 	System.out.println("/////////////////////" + findUser);
+		// 	LoginResponse loginResponse = new LoginResponse();
+
+		// 	// Check if the user exists
+		// 	if (findUser != null) {
+		// 		// Populate login response
+		// 		loginResponse.setName(findUser.getUsername());
+		// 		loginResponse.setUserId(findUser.getUserId());
+		// 		loginResponse.setRole(findUser.getRole());
+		// 		return loginResponse;
+		// 	}
+		// }
+
+
 		Users findUser = userRepository.findByUserId(loginRequest.getUserId());
+		System.out.println("/////////////////////" + findUser);
 		LoginResponse loginResponse = new LoginResponse();
+		
 
 		// Check if the user exists
 		if (findUser != null) {
-		// Populate login response
-		loginResponse.setName(findUser.getUsername());
-		loginResponse.setUserId(findUser.getUserId());
-		loginResponse.setRole(findUser.getRole());
-		return loginResponse;
+			// Populate login response
+			loginResponse.setName(findUser.getName());
+			loginResponse.setUserId(findUser.getUserId());
+			loginResponse.setRole(findUser.getRole());
+			return loginResponse;
 		}
 		return null; // User not found
 	}

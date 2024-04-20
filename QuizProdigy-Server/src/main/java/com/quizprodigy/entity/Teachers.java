@@ -56,28 +56,29 @@ public class Teachers {
 	@Transient // Through this annotation we can tell Hibernate not to persist this field.
 	private String password;
 
-	@OneToMany(mappedBy = "teacherId")
-	private List<Exam> exams;
-	
-	 public Teachers(String teacherId) {
-	        this.teacherId = teacherId;
-	    }
-	 @Override
-	    public String toString() {
-	        return "Teachers{" +
-	                "teacherId='" + teacherId + '\'' +
-	                ", teacherName='" + teacherName + '\'' +
-	                ", department='" + department + '\'' +
-	                ", contactNo='" + contactNo + '\'' + // Include full contact number for this example (adjust as needed)
-	                ", instituteName='" + instituteName + '\'' +
-	                ", employeeNo='" + employeeNo + '\'' +
-	                ", status='" + status + '\'' +
-	                ", createdDate=" + createdDate +
-	                ", modifyDate=" + modifyDate +
-	                ", isDeleted=" + isDeleted +
-	                ", password=" + password + // Mask password for security
-	                ", examsCount=" + (exams != null ? exams.size() : 0) +
-	                '}';
-	    }
+	// @OneToMany(mappedBy = "teacherId")
+	// private List<Exam> exams;
+
+	// public Teachers(String teacherId) {
+	// 	this.teacherId = teacherId;
+	// }
+
+	@Override
+	public String toString() {
+		return "Teachers{" +
+				"teacherId='" + teacherId + '\'' +
+				", teacherName='" + teacherName + '\'' +
+				", department='" + department + '\'' +
+				", contactNo='" + contactNo + '\'' + // Include full contact number for this example (adjust as needed)
+				", instituteName='" + instituteName + '\'' +
+				", employeeNo='" + employeeNo + '\'' +
+				", status='" + status + '\'' +
+				", createdDate=" + createdDate +
+				", modifyDate=" + modifyDate +
+				", isDeleted=" + isDeleted +
+				", password=" + password + // Mask password for security
+//", examsCount=" + (exams != null ? exams.size() : 0) +
+				'}';
+	}
 
 }

@@ -5,10 +5,10 @@ import Swal from 'sweetalert2';
 import { TeacherService } from '../../../../../services/teacher/teacher.service';
 import { error } from 'console';
 import { Cookie } from 'ng2-cookies';
-interface request {
-  questions: any[];
-  exam: any;
-}
+// interface request {
+//   questions: any[];
+//   exam: any;
+// }
 @Component({
   selector: 'app-setquestion',
   templateUrl: './setquestion.component.html',
@@ -17,7 +17,9 @@ interface request {
 export class SetquestionComponent implements OnInit {
   showPreview!: FormGroup<any>;
 
-  constructor(private teacherService: TeacherService) {}
+  constructor(private teacherService: TeacherService) {
+
+  }
 
   // setExam!: FormGroup<any>;
   setquestion!: FormGroup<any>;
@@ -51,6 +53,8 @@ export class SetquestionComponent implements OnInit {
       optionD: new FormControl('', Validators.required),
       answer: new FormControl('', Validators.required),
     });
+
+    this.setExam.value.teacherId=Cookie.get('userId');
   }
   addExamObject!: any;
 
